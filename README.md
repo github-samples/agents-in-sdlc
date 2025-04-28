@@ -14,7 +14,7 @@ Then navigate to the [website](http://localhost:4321) to see the site!
 
 ## License 
 
-This project is licensed under the terms of the MIT open source license. Please refer to [MIT](./LICENSE.txt) for the full terms.
+This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) for the full terms.
 
 ## Maintainers 
 
