@@ -15,5 +15,10 @@ init_db(app)
 # Register blueprints
 app.register_blueprint(games_bp)
 
+@app.route('/')
+def index() -> str:
+    print('Hello from the index route!')
+    return "Welcome to the Game API!"
+
 if __name__ == '__main__':
     app.run(debug=True, port=5100) # Port 5100 to avoid macOS conflicts

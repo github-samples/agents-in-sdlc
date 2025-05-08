@@ -34,12 +34,12 @@
     });
 </script>
 
-<div>
+<div data-testid="game-list-container">
     <h2 class="text-2xl font-medium mb-6 text-slate-100">Featured Games</h2>
     
     {#if loading}
         <!-- loading animation -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div data-testid="loading-skeleton" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each Array(6) as _, i}
                 <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-slate-700/50">
                     <div class="p-6">
@@ -57,36 +57,37 @@
         </div>
     {:else if error}
         <!-- error display -->
-        <div class="text-center py-12 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700">
+        <div data-testid="error-container" class="text-center py-12 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700">
             <p class="text-red-400">{error}</p>
         </div>
     {:else if games.length === 0}
         <!-- no games found -->
-        <div class="text-center py-12 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700">
+        <div data-testid="empty-games" class="text-center py-12 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700">
             <p class="text-slate-300">No games available at the moment.</p>
         </div>
     {:else}
         <!-- game list -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div data-testid="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {#each games as game (game.id)}
                 <a 
-                    href={`/game/${game.id}`} 
+                    href={`/game/${game.id}`}
+                    data-testid={`game-card-${game.id}`}
                     class="group block bg-slate-800/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-slate-700/50 hover:border-blue-500/50 hover:shadow-blue-500/10 hover:shadow-xl transition-all duration-300 hover:translate-y-[-6px]"
                 >
                     <div class="p-6 relative">
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div class="relative z-10">
-                            <h3 class="text-xl font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors">{game.title}</h3>
+                            <h3 data-testid={`game-title-${game.id}`} class="text-xl font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors">{game.title}</h3>
                             
                             {#if game.category_name || game.publisher_name}
                                 <div class="flex gap-2 mb-3">
                                     {#if game.category_name}
-                                        <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-blue-900/60 text-blue-300">
+                                        <span data-testid={`game-category-${game.id}`} class="text-xs font-medium px-2.5 py-0.5 rounded bg-blue-900/60 text-blue-300">
                                             {game.category_name}
                                         </span>
                                     {/if}
                                     {#if game.publisher_name}
-                                        <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-purple-900/60 text-purple-300">
+                                        <span data-testid={`game-publisher-${game.id}`} class="text-xs font-medium px-2.5 py-0.5 rounded bg-purple-900/60 text-purple-300">
                                             {game.publisher_name}
                                         </span>
                                     {/if}
