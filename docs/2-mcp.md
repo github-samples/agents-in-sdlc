@@ -1,10 +1,13 @@
 # Exercise 1 - Setting up the backlog with Copilot Agent Mode and GitHub's MCP Server
 
+| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Custom instructions →][next-lesson] |
+|:--|--:|
+
+There's more to writing code than just writing code. Issues need to be filed, external services need to be called, and information needs to be gathered. Typically this involves interacting with external tools, which can break a developer's flow. Through the power of Model Context Protocol (MCP), you can access all of this functionality right from Copilot!
+
 ## Scenario
 
-You are a part-time developer for Tailspin Toys - a crowdfunding platform for board games with a developer theme. An initial site has been created, with an ability to list games and display details. Your organization is keen to add functionality as quickly as possible to the site to help drive more backers to more games.
-
-In this first exercise, you will set up your backlog of work for the rest of the lab. But rather than creating the issues through the GitHub User Interface, you will use GitHub Copilot Chat Agent Mode and the GitHub Model Context Protocol (MCP) server to create the issues for you. 
+You are a part-time developer for Tailspin Toys - a crowdfunding platform for board games with a developer theme. You've been assigned various tasks to introduce new functionality to the website. Being a good team member, you want to file issues to track your work. To help future you, you've decided to enlist the help of Copilot. You will set up your backlog of work for the rest of the lab, using GitHub Copilot Chat Agent Mode and the GitHub Model Context Protocol (MCP) server to create the issues for you. 
 
 To achieve this, you will:
 
@@ -18,7 +21,7 @@ By the end of this exercise, you will have created a backlog of GitHub issues fo
 
 Agent mode in GitHub Copilot Chat transforms Copilot into an AI agent that can perform actions on your behalf. This mode allows you to interact with Copilot in a more dynamic way, enabling it to use tools and execute tasks, like running tests or terminal commands, reading problems from the editor, and using those insights to update your code. This allows for a more interactive and collaborative workflow, enabling you to leverage the capabilities of AI in your development process.
 
-[Model Context Protocol (MCP)](https://github.blog/ai-and-ml/llms/what-the-heck-is-mcp-and-why-is-everyone-talking-about-it/) provides AI agents with a way to communicate with external tools and services. By using MCP, AI agents can communicate with external tools and services in real-time. This allows them to access up-to-date information (using resources) and perform actions on your behalf (using tools).
+[Model Context Protocol (MCP)][mcp-blog-post] provides AI agents with a way to communicate with external tools and services. By using MCP, AI agents can communicate with external tools and services in real-time. This allows them to access up-to-date information (using resources) and perform actions on your behalf (using tools).
 
 These tools and resources are accessed through an MCP server, which acts as a bridge between the AI agent and the external tools and services. The MCP server is responsible for managing the communication between the AI agent and the external tools (such as existing APIs or local tools like NPM packages). Each MCP server represents a different set of tools and resources that the AI agent can access.
 
@@ -26,24 +29,38 @@ These tools and resources are accessed through an MCP server, which acts as a br
 
 Popular existing MCP servers include:
 
-- **[GitHub MCP Server](https://github.com/github/github-mcp-server)**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests.
-- **[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)**: This server provides browser automation capabilities using Playwright. It allows the AI agent to perform actions such as navigating to web pages, filling out forms, and clicking buttons.
-- **Additional reference servers**: There are many other MCP servers available that provide access to different tools and resources. Anthropic [has a list](https://github.com/modelcontextprotocol/servers) of reference implementations, third-party implementations, and community implementations of MCP servers. 
+- **[GitHub MCP Server][github-mcp-server]**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests.
+- **[Playwright MCP Server][playwright-mcp-server]**: This server provides browser automation capabilities using Playwright. It allows the AI agent to perform actions such as navigating to web pages, filling out forms, and clicking buttons.
+- **Additional reference servers**: There are many other MCP servers available that provide access to different tools and resources. Anthropic [has a list][anthropic-mcp-servers] of reference implementations, third-party implementations, and community implementations of MCP servers. 
 
 > [!IMPORTANT]
 > MCP servers are like any other dependency in your project. Before using an MCP server, carefully review its source code, verify the publisher, and consider the security implications. Only use MCP servers that you trust and be cautious about granting access to sensitive resources or operations.
+
+## Ensure your codespace is ready
+
+In a [prior exercise][prereqs-lesson] you launched the codespace you'll use for the remainder of the coding exercises in this lab. Let's put the final touches on it before we begin using it.
+
+The setup process for the codespace installed and setup many [VS Code extensions][vscode-extensions]. As with any software, updates may be needed. When your codespace is created we'll need to ensure everything is up-to-date.
+
+1. Select **Extensions** on the workbench on the left side of your codespace.
+
+    ![Screenshot of the extensions window with multiple extensions showing either Update or Reload Window buttons](images/extensions-updates.png)
+
+2. Select **Update** on any extensions with an **Update** button. Repeat as necessary.
+3. Select **Reload Window** on any extensions with a **Reload Window** button to reload the codespace.
+4. When prompted by a dialog, select **Reload** to reload the window. This will ensure the latest version is being used.
 
 ## Using GitHub Copilot Chat and agent mode
 
 To access GitHub Copilot Chat agent mode, you need to have the GitHub Copilot Chat extension installed in your IDE, which should already be the case if you are using a GitHub Codespace.
 
 > [!TIP]
-> If you do not have the GitHub Copilot Chat extension installed, you can [install it from the Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot). Or open the Extensions view in Visual Studio Code, search for **GitHub Copilot Chat**, and select **Install**.
+> If you do not have the GitHub Copilot Chat extension installed, you can [install it from the Visual Studio Code Marketplace][copilot-chat-extension]. Or open the Extensions view in Visual Studio Code, search for **GitHub Copilot Chat**, and select **Install**.
 
 Once you have the extension installed, you may need to authenticate with your GitHub account to enable it.
 
 1. Select the **Copilot Chat** icon at the top of your Visual Studio Code window.
-2. If you are following the Microsoft Build 2025 lab, you should already be signed in to your GitHub account in the GitHub Codespace. However, you may need to activate Copilot. Type a message like "Hello there" in the Copilot Chat window and press enter. This should activate Copilot Chat.
+2. Type a message like "Hello there" in the Copilot Chat window and press enter. This should activate Copilot Chat.
 
     ![Example of Copilot Chat activation](images/copilot-chat-activation.png)
 
@@ -63,11 +80,14 @@ Once you have the extension installed, you may need to authenticate with your Gi
 
     ![Example of selecting the Claude 3.5 Sonnet model](images/copilot-agent-mode-model.png)
 
-7. The chat pane should update to indicate that you are now in agent mode. You should see a tools icon, showing that we can configure tools for GitHub Copilot to use.
+> [!IMPORTANT]
+> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude 3.5, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
+
+1. The chat pane should update to indicate that you are now in agent mode. You should see a tools icon, showing that we can configure tools for GitHub Copilot to use.
 
     ![Example of Copilot Chat agent mode with tools icon](images/copilot-agent-mode.png)
 
-Typically, the number of tools available will be set to 0 when setting up a new project, as we have not configured any MCP servers yet. But to help you get started, we have created a **.vscode/mcp.json** file with an example configuration for the [GitHub MCP server](https://github.com/github/github-mcp-server). Let's go and explore that next.
+Typically, the number of tools available will be set to 0 when setting up a new project, as we have not configured any MCP servers yet. But to help you get started, we have created a **.vscode/mcp.json** file with an example configuration for the [GitHub MCP server][github-mcp-server]. Let's go and explore that next.
 
 ## Setting up the GitHub MCP server
 
@@ -109,12 +129,14 @@ The `inputs` section defines the inputs that the MCP server will require. In thi
 
 > [!IMPORTANT]
 > Make sure that you do not share your GitHub Personal Access Token with anyone, as it provides access to your GitHub account and repositories. Treat it like a password and keep it secure. That means you should not check it into source control or share it with anyone else.
+>
+> Because it is a sensitive password, **DO NOT** paste it into the **mcp.json** file, is an artifact of the source code. Published tokens is the leading cause of security breaches. Instead, you'll securely add it to your codespace in a later step.
 
 The `servers` section defines the MCP server that you want to use. In this case, we are using the GitHub MCP server, which is run in a Docker container. The `command` field specifies the command to run the MCP server, and the `args` field specifies the arguments to pass to the command. The `env` field specifies the environment variables to set when running the MCP server. The `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable is set to the value of the `github_token` input, which is provided by the user when prompted.
 
 ## Obtain the token
 
-In order to interact with GitHub via the MCP server you'll need to have a token. This can either be done by [creating a personal access token (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token), or (as in our case) using the GitHub token from the codespace. Let's obtain the GitHub token.
+In order to interact with GitHub via the MCP server you'll need to have a token. This can either be done by [creating a personal access token (PAT)][github-pat-docs], or (as in our case) using the GitHub token from the codespace. Let's obtain the GitHub token.
 
 1. Open the terminal in your Codespace by selecting <kbd>Ctl</kbd>+<kbd>\`</kbd>.
 2. Run the following command to print the value of the GITHUB_TOKEN environment variable:
@@ -165,8 +187,7 @@ Now that you have set up the GitHub MCP server, you can use Copilot Agent mode t
 
     1. Allow users to filter games by category and publisher
     2. Update our repository coding standards (including rules about Python formatting and docstrings) in a custom instructions file
-    3. Create a GitHub Actions workflow which builds and tests the client and server components
-    4. Stretch Goal: Implement pagination on the game list page
+    3. Stretch Goal: Implement pagination on the game list page
     ```
 
 3. Press <kbd>enter</kbd> or select the **Send** button to send the prompt to Copilot.
@@ -197,7 +218,7 @@ You should notice that the issues are fairly detailed. This is where we benefit 
 
 ![Example of issues created in GitHub](images/github-issues-created.png)
 
-## Summary
+## Summary and next steps
 
 Congratulations, you have created issues on GitHub using Copilot Chat and MCP!
 
@@ -209,12 +230,38 @@ To recap, in this exercise we:
 
 With the GitHub MCP server configured, you can now use GitHub Copilot Chat Agent Mode to perform additional actions on your behalf, like creating new repositories, managing pull requests, and searching for information across your repositories.
 
-You can now continue to the next exercise, where you will learn how to [provide Copilot guidance with custom instructions](./2-custom-instructions.md) to ensure code is generated following your organization's defined patterns and practices.
+You can now continue to the next exercise, where you will learn how to [provide Copilot guidance with custom instructions][next-lesson] to ensure code is generated following your organization's defined patterns and practices.
 
 ### Optional exploration exercise – Set up the Microsoft Playwright MCP server
 
-If you are feeling adventurous, you can try installing and configuring another MCP server, such as the [Microsoft Playwright MCP server](https://github.com/microsoft/playwright-mcp). This will allow you to use GitHub Copilot Chat Agent Mode to perform browser automation tasks, such as navigating to web pages, filling out forms, and clicking buttons.
+If you are feeling adventurous, you can try installing and configuring another MCP server, such as the [Microsoft Playwright MCP server][playwright-mcp-server]. This will allow you to use GitHub Copilot Chat Agent Mode to perform browser automation tasks, such as navigating to web pages, filling out forms, and clicking buttons.
 
-You can find the instructions for installing and configuring the Playwright MCP server in the [Playwright MCP repository](https://github.com/microsoft/playwright-mcp).
+You can find the instructions for installing and configuring the Playwright MCP server in the [Playwright MCP repository][playwright-mcp-server].
 
 Notice that the setup process is similar to the GitHub MCP server, but you do not need to provide any credentials like the GitHub Personal Access Token. This is because the Playwright MCP server does not require authentication to access its capabilities.
+
+## Resources
+
+- [What the heck is MCP and why is everyone talking about it?][mcp-blog-post]
+- [GitHub MCP Server][github-mcp-server]
+- [Microsoft Playwright MCP Server][playwright-mcp-server]
+- [Anthropic MCP Servers][anthropic-mcp-servers]
+- [VS Code Extensions][vscode-extensions]
+- [GitHub Copilot Chat Extension][copilot-chat-extension]
+- [Creating a fine-grained personal access token][github-pat-docs]
+
+---
+
+| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Custom instructions →][next-lesson] |
+|:--|--:|
+
+[previous-lesson]: ./1-copilot-coding-agent.md
+[next-lesson]: ./3-custom-instructions.md
+[prereqs-lesson]: ./0-prereqs.md
+[mcp-blog-post]: https://github.blog/ai-and-ml/llms/what-the-heck-is-mcp-and-why-is-everyone-talking-about-it/
+[github-mcp-server]: https://github.com/github/github-mcp-server
+[playwright-mcp-server]: https://github.com/microsoft/playwright-mcp
+[anthropic-mcp-servers]: https://github.com/modelcontextprotocol/servers
+[vscode-extensions]: https://code.visualstudio.com/docs/configure/extensions/extension-marketplace
+[copilot-chat-extension]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+[github-pat-docs]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token

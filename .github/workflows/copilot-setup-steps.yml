@@ -22,8 +22,7 @@ jobs:
           cache: "pip"
 
       - name: Install Python dependencies
-        working-directory: ./server
-        run: pip install -r requirements.txt
+        run: ./scripts/setup-env.sh
 
       # Frontend setup - Node.js
       - name: Set up Node.js
@@ -36,12 +35,3 @@ jobs:
       - name: Install JavaScript dependencies
         working-directory: ./client
         run: npm ci
-
-      # .NET setup
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '9.0.x'
-      
-      - name: Display .NET version
-        run: dotnet --version
