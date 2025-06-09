@@ -38,5 +38,7 @@ class Game(BaseModel):
             'description': self.description,
             'publisher': {'id': self.publisher.id, 'name': self.publisher.name} if self.publisher else None,
             'category': {'id': self.category.id, 'name': self.category.name} if self.category else None,
+            'publisher_name': self.publisher.name if self.publisher else None,
+            'category_name': self.category.name if self.category else None,
             'starRating': self.star_rating  # Changed from star_rating to starRating
         }

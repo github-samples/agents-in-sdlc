@@ -7,6 +7,7 @@
         description: string;
         publisher_name?: string;
         category_name?: string;
+        starRating: number | null;
     }
 
     export let games: Game[] = [];
@@ -32,6 +33,17 @@
     onMount(() => {
         fetchGames();
     });
+
+    // Function to render stars based on rating
+    function renderStarRating(rating: number | null): string {
+        if (rating === null) return "Not yet rated";
+        
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        
+        return '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+    }
 </script>
 
 <div>
@@ -46,6 +58,7 @@
                         <div class="animate-pulse">
                             <div class="h-6 bg-slate-700 rounded w-3/4 mb-3"></div>
                             <div class="h-4 bg-slate-700 rounded w-1/2 mb-4"></div>
+                            <div class="h-3 bg-slate-700 rounded w-1/4 mb-2"></div>
                             <div class="h-3 bg-slate-700 rounded w-full mb-3"></div>
                             <div class="h-3 bg-slate-700 rounded w-5/6 mb-4"></div>
                             <div class="h-2 bg-slate-700 rounded-full w-full mb-2"></div>
@@ -93,6 +106,16 @@
                                             {game.publisher_name}
                                         </span>
                                     {/if}
+                                </div>
+                            {/if}
+                            
+                            <!-- Star Rating -->
+                            {#if game.starRating !== null}
+                                <div class="mt-2 mb-2">
+                                    <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-1 rounded-full" data-testid="game-card-rating">
+                                        <span class="text-yellow-400">{renderStarRating(game.starRating)}</span> 
+                                        {game.starRating.toFixed(1)}
+                                    </span>
                                 </div>
                             {/if}
                             

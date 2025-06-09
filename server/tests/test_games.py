@@ -135,7 +135,7 @@ class TestGamesRoutes(unittest.TestCase):
         self.assertIsInstance(data, list)
         self.assertEqual(len(data), len(self.TEST_DATA["games"]))
         
-        required_fields = ['id', 'title', 'description', 'publisher', 'category', 'starRating']
+        required_fields = ['id', 'title', 'description', 'publisher', 'category', 'publisher_name', 'category_name', 'starRating']
         for field in required_fields:
             self.assertIn(field, data[0])
 

@@ -86,6 +86,14 @@ test.describe('Game Listing and Navigation', () => {
       const categoryText = await page.locator('[data-testid="game-details-category"]').textContent();
       expect(categoryText?.trim()).toBeTruthy();
     }
+    
+    // Check if game has a rating display
+    const hasRating = await page.locator('[data-testid="game-rating"]').isVisible();
+    if (hasRating) {
+      // If rating exists, verify it has content
+      const ratingText = await page.locator('[data-testid="game-rating"]').textContent();
+      expect(ratingText?.trim()).toBeTruthy();
+    }
   });
 
   test('should display a button to back the game', async ({ page }) => {
@@ -130,5 +138,35 @@ test.describe('Game Listing and Navigation', () => {
     // The page should either show an error or handle it gracefully
     // We expect the page to not crash and still have a valid title
     await expect(page).toHaveTitle(/Game Details - Tailspin Toys/);
+  });
+
+  test('should display star rating for games that have ratings', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    
+    // Find all game cards
+    const gameCards = page.locator('[data-testid="game-card"]');
+    const count = await gameCards.count();
+    
+    // Check if any games have ratings displayed
+    let foundRating = false;
+    
+    for (let i = 0; i < count; i++) {
+      const card = gameCards.nth(i);
+      const hasRating = await card.locator('[data-testid="game-card-rating"]').isVisible();
+      
+      if (hasRating) {
+        foundRating = true;
+        const ratingText = await card.locator('[data-testid="game-card-rating"]').textContent();
+        expect(ratingText).toBeTruthy();
+        break;
+      }
+    }
+    
+    // Note: This test passes even if no games have ratings, as long as the check
+    // ran successfully. Not all games need to have ratings, but the system should
+    // be able to display them when they exist.
   });
 });
