@@ -5,8 +5,15 @@
         id: number;
         title: string;
         description: string;
-        publisher_name?: string;
-        category_name?: string;
+        publisher?: {
+            id: number;
+            name: string;
+        } | null;
+        category?: {
+            id: number;
+            name: string;
+        } | null;
+        starRating: number | null;
     }
 
     export let games: Game[] = [];
@@ -28,6 +35,17 @@
             loading = false;
         }
     };
+
+    // Function to render stars based on rating
+    function renderStarRating(rating: number | null): string {
+        if (rating === null) return "Not rated";
+        
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        
+        return '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+    }
 
     onMount(() => {
         fetchGames();
@@ -81,20 +99,27 @@
                         <div class="relative z-10">
                             <h3 class="text-xl font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors" data-testid="game-title">{game.title}</h3>
                             
-                            {#if game.category_name || game.publisher_name}
-                                <div class="flex gap-2 mb-3">
-                                    {#if game.category_name}
-                                        <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-blue-900/60 text-blue-300" data-testid="game-category">
-                                            {game.category_name}
-                                        </span>
-                                    {/if}
-                                    {#if game.publisher_name}
-                                        <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-purple-900/60 text-purple-300" data-testid="game-publisher">
-                                            {game.publisher_name}
-                                        </span>
-                                    {/if}
+                            {#if game.starRating !== null}
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-blue-500/20 text-blue-400 text-sm px-3 py-1 rounded-full" data-testid="game-rating">
+                                        <span class="text-yellow-400">{renderStarRating(game.starRating)}</span> 
+                                        {game.starRating.toFixed(1)}
+                                    </span>
                                 </div>
                             {/if}
+                            
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                {#if game.category}
+                                    <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-blue-900/60 text-blue-300" data-testid="game-category">
+                                        {game.category.name}
+                                    </span>
+                                {/if}
+                                {#if game.publisher}
+                                    <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-purple-900/60 text-purple-300" data-testid="game-publisher">
+                                        {game.publisher.name}
+                                    </span>
+                                {/if}
+                            </div>
                             
                             <p class="text-slate-400 mb-4 text-sm line-clamp-2" data-testid="game-description">{game.description}</p>
                             

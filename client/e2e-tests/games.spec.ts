@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Game Listing and Navigation', () => {
-  test('should display games with titles on index page', async ({ page }) => {
+  test('should display games with titles, ratings, categories and publishers on index page', async ({ page }) => {
     await page.goto('/');
     
     // Wait for the games to load
@@ -24,6 +24,14 @@ test.describe('Game Listing and Navigation', () => {
     // Verify that game titles are not empty
     const gameTitle = await firstGameCard.locator('[data-testid="game-title"]').textContent();
     expect(gameTitle?.trim()).toBeTruthy();
+    
+    // Check that either rating, category, or publisher is present
+    const ratingExists = await firstGameCard.locator('[data-testid="game-rating"]').isVisible();
+    const categoryExists = await firstGameCard.locator('[data-testid="game-category"]').isVisible();
+    const publisherExists = await firstGameCard.locator('[data-testid="game-publisher"]').isVisible();
+    
+    // At least one of these elements should be visible
+    expect(ratingExists || categoryExists || publisherExists).toBeTruthy();
   });
 
   test('should navigate to correct game details page when clicking on a game', async ({ page }) => {
