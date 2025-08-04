@@ -70,10 +70,10 @@ The initial implementation of the website is functional, but we want to enhance 
 
    ![Screenshot of the Copilot Chat panel showing the Agent Mode dropdown](images/copilot-agent-mode-dropdown.png)
 
-5. Select **Claude 3.5 Sonnet** from the list of available models.
+5. Select **Claude Sonnet 4** from the list of available models.
 
 > [!IMPORTANT]
-> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude 3.5, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
+> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude Sonnet 4, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
 
 5. Ask Copilot about the backlog of issues by sending the following prompt to Copilot, replacing **<YOUR_REPOSITORY_PATH>** with the organization/name of your repository which you noted earlier:
 
@@ -81,7 +81,7 @@ The initial implementation of the website is functional, but we want to enhance 
    Please show me the backlog of items from my repository at <YOUR_REPOSITORY_PATH>. Help me prioritize them based on those which will be most useful to the user.
    ```
 
-6. Notice GitHub Copilot (likely) identifies **list_issues** as the MCP command to run to access the right information.
+6. Notice GitHub Copilot (likely) identifies `list_issues` or `search_issues` as the MCP command to run to access the right information.
 
 > [!NOTE]
 > Because of the probabilistic nature of LLMs, Copilot may utilize a different MCP command, but should still be able to complete the task.
@@ -113,7 +113,7 @@ In addition, the tests need to run (and pass) before we merge everything into ou
 
    ![Screenshot showing an example of switching to Agent Mode](images/copilot-agent-mode-dropdown.png)
 
-4. Ensure **Claude 3.5** is still selected for the model.
+4. Ensure **Claude Sonnet 4** is still selected for the model.
 5. Prompt Copilot to implement the functionality based on the issue we created earlier by using the following prompt, replacing **<YOUR_REPOSITORY_PATH>** with the organization/name of your repository which you noted earlier:
 
    ```plaintext
