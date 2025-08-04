@@ -115,6 +115,8 @@ The MCP server configuration is defined in the **servers** section of the **mcp.
 
 To utilize an MCP server it needs to be "started". This will allow GitHub Copilot to communicate with the server and perform the tasks you request.
 
+> [!NOTE] The exact authentication flow may vary a little bit.
+
 1. Inside VS Code, open **.vscode/mcp.json**.
 2. To start the GitHub MCP server, select **Start** above the GitHub server.
 
