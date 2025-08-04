@@ -78,12 +78,12 @@ Once you have the extension installed, you may need to authenticate with your Gi
 
     ![Example of switching to agent mode](images/copilot-agent-mode-dropdown.png)
 
-7. Set the model to **Claude 3.5 Sonnet**.
+7. Set the model to **Claude Sonnet 4**.
 
-    ![Example of selecting the Claude 3.5 Sonnet model](images/copilot-agent-mode-model.png)
+    ![Example of selecting the Claude Sonnet 4 model](images/copilot-agent-mode-model.png)
 
 > [!IMPORTANT]
-> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude 3.5 Sonnet, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
+> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude Sonnet 4, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
 
 8. The chat pane should update to indicate that you are now in agent mode. You should see a tools icon, showing that we can configure tools for GitHub Copilot to use.
 
@@ -114,6 +114,8 @@ This configuration provides GitHub Copilot access to several additional tools so
 The MCP server configuration is defined in the **servers** section of the **mcp.json** file. Each MCP server is defined by a unique name (in this case, github) and its type (in this case, **http**). When using local MCP servers, the type may be **stdio** and have a **command** and **args** field to specify how to start the MCP server. You can find out more about the configuration format in the [VS Code documentation][vscode-mcp-config]. In some configurations (not for the remote GitHub MCP server with OAuth), you may also see an **inputs** section. This defines any inputs (like sensitive tokens) that the MCP server may require. You can read more about the configuration properties in the [VS Code documentation][vscode-mcp-config]
 
 To utilize an MCP server it needs to be "started". This will allow GitHub Copilot to communicate with the server and perform the tasks you request.
+
+> [!NOTE] The exact authentication flow may vary a little bit.
 
 1. Inside VS Code, open **.vscode/mcp.json**.
 2. To start the GitHub MCP server, select **Start** above the GitHub server.
@@ -149,7 +151,7 @@ That's it! You can now use Copilot Chat in agent mode to create issues, manage p
 
 Now that you have set up the GitHub MCP server, you can use Copilot Agent mode to create a backlog of tasks for use in the rest of the lab.
 
-1. Return to the Copilot Chat pane. Select **Agent** from the dropdown list. Set the model to **Claude 3.5 Sonnet**.
+1. Return to the Copilot Chat pane. Select **Agent** from the dropdown list. Set the model to **Claude Sonnet 4**.
 
     ![Example of the Copilot Chat pane with Agent Mode selected](images/copilot-agent-mode-dropdown.png)
 
