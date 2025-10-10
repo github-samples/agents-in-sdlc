@@ -22,4 +22,4 @@ with app.app_context():
 app.register_blueprint(games_bp)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5100) # Port 5100 to avoid macOS conflicts
+    app.run(debug=True, port=5100, host='0.0.0.0') # Bind to 0.0.0.0 for dev container access
