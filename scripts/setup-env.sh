@@ -26,6 +26,8 @@ pip install -r server/requirements.txt
 echo "Installing client dependencies..."
 cd client || exit 1
 npm install
+npx astro telemetry disable
+npx playwright install
 
 # Return to project root
 cd "$PROJECT_ROOT"
