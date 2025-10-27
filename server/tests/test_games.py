@@ -168,5 +168,110 @@ class TestGamesRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(data['error'], "Game not found")
 
+    def test_get_games_filter_by_category(self) -> None:
+        """Test filtering games by category"""
+        # Get all games first to find a category ID
+        response = self.client.get(self.GAMES_API_PATH)
+        all_games = self._get_response_data(response)
+        
+        # Use the first game's category ID for filtering
+        category_id = all_games[0]['category']['id']
+        
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?category_id={category_id}')
+        filtered_games = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(len(filtered_games), 0)
+        
+        # Verify all returned games have the same category
+        for game in filtered_games:
+            self.assertEqual(game['category']['id'], category_id)
+
+    def test_get_games_filter_by_publisher(self) -> None:
+        """Test filtering games by publisher"""
+        # Get all games first to find a publisher ID
+        response = self.client.get(self.GAMES_API_PATH)
+        all_games = self._get_response_data(response)
+        
+        # Use the first game's publisher ID for filtering
+        publisher_id = all_games[0]['publisher']['id']
+        
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?publisher_id={publisher_id}')
+        filtered_games = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(len(filtered_games), 0)
+        
+        # Verify all returned games have the same publisher
+        for game in filtered_games:
+            self.assertEqual(game['publisher']['id'], publisher_id)
+
+    def test_get_games_filter_by_both_category_and_publisher(self) -> None:
+        """Test filtering games by both category and publisher"""
+        # Get all games first to find IDs
+        response = self.client.get(self.GAMES_API_PATH)
+        all_games = self._get_response_data(response)
+        
+        # Use the first game's category and publisher IDs for filtering
+        category_id = all_games[0]['category']['id']
+        publisher_id = all_games[0]['publisher']['id']
+        
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?category_id={category_id}&publisher_id={publisher_id}')
+        filtered_games = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(len(filtered_games), 0)
+        
+        # Verify all returned games have both the category and publisher
+        for game in filtered_games:
+            self.assertEqual(game['category']['id'], category_id)
+            self.assertEqual(game['publisher']['id'], publisher_id)
+
+    def test_get_games_filter_invalid_category_id(self) -> None:
+        """Test filtering with invalid category ID"""
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?category_id=invalid')
+        data = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(data['error'], "Invalid category_id parameter")
+
+    def test_get_games_filter_invalid_publisher_id(self) -> None:
+        """Test filtering with invalid publisher ID"""
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?publisher_id=invalid')
+        data = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(data['error'], "Invalid publisher_id parameter")
+
+    def test_get_games_filter_nonexistent_category(self) -> None:
+        """Test filtering with non-existent category ID"""
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?category_id=999')
+        filtered_games = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(filtered_games), 0)
+
+    def test_get_games_filter_nonexistent_publisher(self) -> None:
+        """Test filtering with non-existent publisher ID"""
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}?publisher_id=999')
+        filtered_games = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(filtered_games), 0)
+
 if __name__ == '__main__':
     unittest.main()

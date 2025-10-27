@@ -2,6 +2,14 @@
 
 This repository contains the project for a 1 hour guided workshop to explore GitHub Copilot Agent Mode and related features in Visual Studio Code. The project is a website for a fictional game crowd-funding company, with a [Flask](https://flask.palletsprojects.com/en/stable/) backend using [SQLAlchemy](https://www.sqlalchemy.org/) and [Astro](https://astro.build/) frontend using [Svelte](https://svelte.dev/) for dynamic pages.
 
+## Features
+
+- **Game Listing**: Browse all available games for crowdfunding
+- **Game Details**: View detailed information about individual games
+- **Filtering**: Filter games by category and publisher using intuitive dropdown controls
+- **Responsive Design**: Dark mode interface with modern styling using Tailwind CSS
+- **RESTful API**: Backend API with endpoints for games, categories, and publishers
+
 ## Start the workshop
 
 **To begin the workshop, start at [docs/README.md](./docs/README.md)**
@@ -17,6 +25,25 @@ A script file has been created to launch the site. You can run it by:
 ```
 
 Then navigate to the [website](http://localhost:4321) to see the site!
+
+## API Endpoints
+
+The Flask backend provides the following REST API endpoints:
+
+### Games
+- `GET /api/games` - Retrieve all games
+- `GET /api/games?category_id=<id>` - Filter games by category
+- `GET /api/games?publisher_id=<id>` - Filter games by publisher  
+- `GET /api/games?category_id=<id>&publisher_id=<id>` - Filter by both category and publisher
+- `GET /api/games/<id>` - Retrieve a specific game by ID
+
+### Categories
+- `GET /api/categories` - Retrieve all categories
+- `GET /api/categories/<id>` - Retrieve a specific category by ID
+
+### Publishers
+- `GET /api/publishers` - Retrieve all publishers
+- `GET /api/publishers/<id>` - Retrieve a specific publisher by ID
 
 ## License 
 

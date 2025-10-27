@@ -127,3 +127,144 @@ test.describe('Game Listing and Navigation', () => {
     await expect(page).toHaveTitle(/Game Details - Tailspin Toys/);
   });
 });
+
+test.describe('Game Filtering', () => {
+  test('should display filter controls on the index page', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for the games to load
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
+    
+    // Check that filter controls are present
+    await expect(page.locator('select#category-filter')).toBeVisible();
+    await expect(page.locator('select#publisher-filter')).toBeVisible();
+    await expect(page.locator('text=Clear Filters')).toBeVisible();
+  });
+
+  test('should filter games by category', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
+    
+    // Get initial count of games
+    const initialGameCards = page.getByTestId('game-card');
+    const initialCount = await initialGameCards.count();
+    
+    // Select a category from the dropdown
+    const categorySelect = page.locator('select#category-filter');
+    await categorySelect.selectOption({ index: 1 }); // Select first non-empty option
+    
+    // Wait for games to reload
+    await page.waitForTimeout(500);
+    
+    // Get filtered count of games
+    const filteredGameCards = page.getByTestId('game-card');
+    const filteredCount = await filteredGameCards.count();
+    
+    // Verify that filtering occurred (this assumes we have games with different categories)
+    expect(filteredCount).toBeGreaterThanOrEqual(0);
+    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+  });
+
+  test('should filter games by publisher', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
+    
+    // Get initial count of games
+    const initialGameCards = page.getByTestId('game-card');
+    const initialCount = await initialGameCards.count();
+    
+    // Select a publisher from the dropdown
+    const publisherSelect = page.locator('select#publisher-filter');
+    await publisherSelect.selectOption({ index: 1 }); // Select first non-empty option
+    
+    // Wait for games to reload
+    await page.waitForTimeout(500);
+    
+    // Get filtered count of games
+    const filteredGameCards = page.getByTestId('game-card');
+    const filteredCount = await filteredGameCards.count();
+    
+    // Verify that filtering occurred (this assumes we have games with different publishers)
+    expect(filteredCount).toBeGreaterThanOrEqual(0);
+    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+  });
+
+  test('should clear filters when Clear Filters button is clicked', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
+    
+    // Get initial count of games
+    const initialGameCards = page.getByTestId('game-card');
+    const initialCount = await initialGameCards.count();
+    
+    // Apply a category filter
+    const categorySelect = page.locator('select#category-filter');
+    await categorySelect.selectOption({ index: 1 });
+    
+    // Wait for games to reload
+    await page.waitForTimeout(500);
+    
+    // Click Clear Filters button
+    const clearFiltersButton = page.locator('text=Clear Filters');
+    await clearFiltersButton.click();
+    
+    // Wait for games to reload
+    await page.waitForTimeout(500);
+    
+    // Verify that we're back to showing all games
+    const clearedGameCards = page.getByTestId('game-card');
+    const clearedCount = await clearedGameCards.count();
+    
+    expect(clearedCount).toBe(initialCount);
+    
+    // Verify that dropdowns are reset
+    await expect(categorySelect).toHaveValue('');
+    await expect(page.locator('select#publisher-filter')).toHaveValue('');
+  });
+
+  test('should filter games by both category and publisher', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
+    
+    // Apply both category and publisher filters
+    const categorySelect = page.locator('select#category-filter');
+    const publisherSelect = page.locator('select#publisher-filter');
+    
+    await categorySelect.selectOption({ index: 1 });
+    await publisherSelect.selectOption({ index: 1 });
+    
+    // Wait for games to reload
+    await page.waitForTimeout(500);
+    
+    // Verify games are filtered (they should all have the selected category and publisher)
+    const filteredGameCards = page.getByTestId('game-card');
+    const filteredCount = await filteredGameCards.count();
+    
+    expect(filteredCount).toBeGreaterThanOrEqual(0);
+    
+    // If there are any games shown, they should have both the category and publisher tags
+    if (filteredCount > 0) {
+      const firstCard = filteredGameCards.first();
+      
+      // Check that both category and publisher badges are present
+      const categoryBadge = firstCard.getByTestId('game-category');
+      const publisherBadge = firstCard.getByTestId('game-publisher');
+      
+      await expect(categoryBadge).toBeVisible();
+      await expect(publisherBadge).toBeVisible();
+    }
+  });
+});

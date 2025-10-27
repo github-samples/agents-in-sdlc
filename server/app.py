@@ -1,6 +1,8 @@
 import os
 from flask import Flask
 from routes.games import games_bp
+from routes.publishers import publishers_bp
+from routes.categories import categories_bp
 from models import db
 from utils.database import get_connection_string
 
@@ -20,6 +22,8 @@ with app.app_context():
 
 # Register blueprints
 app.register_blueprint(games_bp)
+app.register_blueprint(publishers_bp)
+app.register_blueprint(categories_bp)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5100) # Port 5100 to avoid macOS conflicts
