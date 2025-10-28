@@ -220,7 +220,7 @@ Next we'll use [agent mode to add functionality to the site][next-lesson].
 [instruction-files]: https://code.visualstudio.com/docs/copilot/copilot-customization
 [python-type-hints]: https://docs.python.org/3/library/typing.html
 [games-endpoints]: ../server/routes/games.py
-[games-tests]: ../server/tests/test_routes/test_games.py
+[games-tests]: ../server/tests/test_games.py
 [instructions-best-practices]: https://docs.github.com/en/enterprise-cloud@latest/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
 [personal-instructions]: https://docs.github.com/en/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 

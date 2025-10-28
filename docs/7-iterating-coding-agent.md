@@ -1,4 +1,4 @@
-# Exercise 7: Review GitHub Copilot coding agent's work
+# Exercise 7: Iterating on GitHub Copilot coding agent's work
 
 | [← Previous lesson: Mission control][previous-lesson] |
 |:--|
@@ -159,7 +159,7 @@ This is just the beginning, and we can't wait to see how you use Copilot to help
 
 ---
 
-| [← Previous lesson: Mission control][previous-lesson] |
+| [← Previous lesson: Managing agents][previous-lesson] |
 |:--|
 
 [github-copilot]: https://github.com/features/copilot
@@ -170,4 +170,4 @@ This is just the beginning, and we can't wait to see how you use Copilot to help
 [coding-agent-best-practices]: https://docs.github.com/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks
 [agent-firewall]: https://docs.github.com/copilot/customizing-copilot/customizing-or-disabling-the-firewall-for-copilot-coding-agent
 
-[previous-lesson]: ./6-mission-control.md
+[previous-lesson]: ./6-managing-agents.md

@@ -1,11 +1,11 @@
-# Exercise 6 - Monitoring agent tasks in mission control
+# Exercise 6 - Monitoring and managing agents
 
-| [← Previous lesson: Custom agents][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
+| [← Previous lesson: Custom agents][previous-lesson] | [Next lesson: Iterating on coding agent's work →][next-lesson] |
 |:--|--:|
 
-As the number of agents assigned to various tasks grows we need a centralized location to monitor and guide our agents. [Mission control][mission-control] is built to support supporting your agents.
+As the number of agents assigned to various tasks grows we need a centralized location to monitor and guide our agents. [The agents page][agents-page] in Copilot HQ is built to support supporting your agents.
 
-From mission control you can see all sessions, past and present. You can explore the operations performed, and even redirect an in-progress session to help guide it.
+From this mission control you can see all sessions, past and present. You can explore the operations performed, and even steer an in-progress session to help guide it.
 
 ## Scenario
 
@@ -13,14 +13,14 @@ After assigning the agent to create a high-accessible mode, the team realized it
 
 In this lesson you will:
 
-- explore mission control to monitor coding agent sessions.
-- redirect an in-flight session to request additional functionality.
+- explore the agents page to monitor coding agent sessions.
+- steer an in-flight session to request additional functionality.
 
 ## Review Copilot coding agent sessions
 
 Let's start by seeing the tasks we've already assigned to GitHub Copilot coding agent in mission control.
 
-1. Navigate to mission control at [https://github.com/copilot/agents](https://github.com/copilot/agents).
+1. Navigate to agents page at [https://github.com/copilot/agents](https://github.com/copilot/agents).
 2. Note the list of sessions, both on the main pane and on the left pane. You should see the list of the tasks you've assigned to Copilot, including:
     - Updating documentation for your codebase.
     - Generating APIs for modifying products.
@@ -36,7 +36,7 @@ Let's start by seeing the tasks we've already assigned to GitHub Copilot coding 
 
 4. Also note the pull request (PR) pane which appears on the right side. This allows you to see the PR and files changed for additional monitoring.
 
-## Redirect coding agent
+## Steering coding agent
 
 Now that we've seen the sessions which are active, let's request Copilot include the light mode toggle while it works on the high-contrast mode.
 
@@ -63,26 +63,26 @@ From here, Copilot will get to work on the updated task! This will take several 
 
 ## Summary and next steps
 
-This lesson explored mission control, your central hub for monitoring and guiding GitHub Copilot coding agent sessions. With mission control you can track all active and completed sessions, review the work being performed, and even redirect in-flight sessions to adjust scope or provide additional guidance.
+This lesson explored Copilot HQ and the agents page, your central hub for monitoring and guiding GitHub Copilot coding agent sessions. With this mission control you can track all active and completed sessions, review the work being performed, and even redirect in-flight sessions to adjust scope or provide additional guidance.
 
 You explored these concepts:
 
-- explored mission control to monitor coding agent sessions.
+- explored Copilot HQ and the agents page to monitor coding agent sessions.
 - redirected an in-flight session to request additional functionality.
 
-With Copilot completing its work on the accessibility features, we can now turn our attention to our next lesson, [reviewing the pull requests Copilot created][next-lesson]. Mission control provides visibility into agent work and enables dynamic collaboration with coding agents as they work on tasks.
+With Copilot completing its work on the accessibility features, we can now turn our attention to our next lesson, [iterating on the pull requests Copilot created][next-lesson]. Mission control provides visibility into agent work and enables dynamic collaboration with coding agents as they work on tasks.
 
 ## Resources
 
-- [Mission control][mission-control]
+- [Copilot HQ agents page][agents-page]
 - [Custom agents][custom-agents]
 
 ---
 
-| [← Previous lesson: Custom agents][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
+| [← Previous lesson: Custom agents][previous-lesson] | [Next lesson: Iterating on coding agent's work →][next-lesson] |
 |:--|--:|
 
-[mission-control]: https://github.blog/changelog/2025-10-28-a-mission-control-to-assign-steer-and-track-copilot-coding-agent-tasks
+[agents-page]: https://github.blog/changelog/2025-10-28-a-agents-page-to-assign-steer-and-track-copilot-coding-agent-tasks
 [custom-agents]: https://docs.github.com/copilot/concepts/agents/coding-agent/about-custom-agents
-[next-lesson]: ./7-reviewing-coding-agent.md
+[next-lesson]: ./7-iterating-coding-agent.md
 [previous-lesson]: ./5-custom-agents.md

@@ -3,7 +3,7 @@
 | [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
 |:--|--:|
 
-| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Mission control →][next-lesson] |
+| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Managing agents →][next-lesson] |
 |:--|--:|
 
 [Custom agents][custom-agents] in GitHub Copilot allow you to create specialized AI assistants tailored to specific tasks or domains within your development workflow. By defining agents through markdown files in the `.github/agents` folder of your repository, you can provide Copilot with focused instructions, best practices, coding patterns, and domain-specific knowledge that guide it to perform particular types of work more effectively. This allows teams to codify their expertise and standards into reusable agents—such as an accessibility agent that ensures [WCAG][wcag] compliance, a security agent that follows secure coding practices, or a testing agent that maintains consistent test patterns—enabling developers to leverage these specialized capabilities on-demand for faster, more consistent implementations.
@@ -76,7 +76,7 @@ You explored these concepts:
 - how to create a custom agent.
 - assigning a task to a custom agent.
 
-With Copilot working on implementing the high contrast mode, we can now turn our attention to our next lesson, [using mission control to monitor and guide agent sessions][next-lesson]. Custom agents help ensure that Copilot follows your organization's best practices and domain-specific requirements, enabling faster and more consistent implementations across your team.
+With Copilot working on implementing the high contrast mode, we can now turn our attention to our next lesson, [using Copilot HQ to monitor and guide agent sessions][next-lesson]. Custom agents help ensure that Copilot follows your organization's best practices and domain-specific requirements, enabling faster and more consistent implementations across your team.
 
 ## Resources
 
@@ -86,12 +86,12 @@ With Copilot working on implementing the high contrast mode, we can now turn our
 
 ---
 
-| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Mission control →][next-lesson] |
+| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Managing agents →][next-lesson] |
 |:--|--:|
 
 [custom-agents]: https://docs.github.com/copilot/concepts/agents/coding-agent/about-custom-agents
 [wcag]: https://www.w3.org/WAI/standards-guidelines/wcag/
 [org-custom-agents]: https://docs.github.com/copilot/how-tos/administer-copilot/manage-for-organization/prepare-for-custom-agents
 [enterprise-custom-agents]: https://docs.github.com/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/prepare-for-custom-agents
-[next-lesson]: ./6-mission-control.md
+[next-lesson]: ./6-managing-agents.md
 [previous-lesson]: ./4-copilot-coding-agent.md

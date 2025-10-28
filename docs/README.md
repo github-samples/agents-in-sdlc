@@ -18,7 +18,7 @@ The labs will walk you through the most common workloads with the agent capabili
 4. [Assign issues to GitHub Copilot coding agent](./4-copilot-coding-agent.md) to allow Copilot to work on tasks asynchronously.
 5. [Create and use custom agents](./5-custom-agents.md) to provide specialized guidance for specific tasks.
 6. [Monitor and guide agent sessions in mission control](./6-mission-control.md) to track progress and redirect work.
-7. [Review Copilot coding agent's work](./7-reviewing-coding-agent.md) to ensure everything looks good!
+7. [Iterate on Copilot coding agent's work](./7-iterating-coding-agent.md) to refine and improve the generated code.
 
 ## Scenario
 

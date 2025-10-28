@@ -22,7 +22,7 @@ These are both examples of tasks which can quickly find themselves deprioritized
 
 ## Introducing GitHub Copilot coding agent
 
-[GitHub Copilot coding agent][coding-agent-overview] can perform tasks in the background, much in the same way a human developer would. And, just like with working with a human developer, this is done by [assigning a GitHub issue to Copilot][assign-issue]. Once assigned, Copilot will create a draft pull request to track its progress, setup an environment, and begin working on the task. You can dig into Copilot's session while it's still in flight or after its completed. Once its ready for you to review the proposed solution, it'll tag you in the pull request!
+[GitHub Copilot coding agent][coding-agent-overview] can perform tasks in the background, much in the same way a human developer would. And, just like with working with a human developer, this can be done in multiple ways, including [assigning a GitHub issue to Copilot][assign-issue]. Once assigned, Copilot will create a draft pull request to track its progress, setup an environment, and begin working on the task. You can dig into Copilot's session while it's still in flight or after its completed. Once its ready for you to review the proposed solution, it'll tag you in the pull request!
 
 ## The importance of well-scoped instructions
 
