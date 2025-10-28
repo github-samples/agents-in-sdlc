@@ -1,7 +1,5 @@
 # Exercise 5 - Custom agents
 
-| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
-|:--|--:|
 
 | [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Managing agents →][next-lesson] |
 |:--|--:|
