@@ -9,7 +9,7 @@ From mission control you can see all sessions, past and present. You can explore
 
 ## Scenario
 
-After assigning the agent to create a high-accessible mode, the team realized it would be a good time to add a light mode as well. Since work was already being done to update the style of the site and add toggle functionality, it seemed logical to include this functionality. You want to update the agent's work to ensure it introduces this update.
+After assigning the agent to create a high-contrast mode, the team realized it would be a good time to add a light mode as well. Since work was already being done to update the style of the site and add toggle functionality, it seemed logical to include this functionality. You want to update the agent's work to ensure it introduces this update.
 
 In this lesson you will:
 
