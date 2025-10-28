@@ -12,11 +12,13 @@ The recent additions to the capabilities of GitHub Copilot provide powerful tool
 The labs will walk you through the most common workloads with the agent capabilities of GitHub Copilot.
 
 0. [Setup the environment](./0-prereqs.md).
-1. [Assign issues to GitHub Copilot coding agent](./1-copilot-coding-agent.md) to allow Copilot to work on tasks asynchronously.
-2. [Configure and interact with external services](./2-mcp.md) through Model Context Protocol (MCP).
-3. [Provide context to Copilot](./3-custom-instructions.md) through the use of custom instructions, prompt files, and chat participants.
-4. [Complete a site-wide update](./4-copilot-agent-mode-vscode.md) with the help of Copilot agent mode.
-5. [Review Copilot coding agent's work](./5-reviewing-coding-agent.md) to ensure everything looks good!
+1. [Configure and interact with external services](./1-mcp.md) through Model Context Protocol (MCP).
+2. [Provide context to Copilot](./2-custom-instructions.md) through the use of custom instructions, prompt files, and chat participants.
+3. [Complete a site-wide update](./3-copilot-agent-mode-vscode.md) with the help of Copilot agent mode.
+4. [Assign issues to GitHub Copilot coding agent](./4-copilot-coding-agent.md) to allow Copilot to work on tasks asynchronously.
+5. [Create and use custom agents](./5-custom-agents.md) to provide specialized guidance for specific tasks.
+6. [Monitor and guide agent sessions in mission control](./6-mission-control.md) to track progress and redirect work.
+7. [Review Copilot coding agent's work](./7-reviewing-coding-agent.md) to ensure everything looks good!
 
 ## Scenario
 

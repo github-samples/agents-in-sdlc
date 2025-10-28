@@ -30,18 +30,18 @@ Next up, we will be using a codespace to complete the lab exercises. [GitHub Cod
 
     ![Create a new codespace](images/create-codespace.png)
 
-The creation of the codespace will take several minutes, although it's still far quicker than having to manually install all the services! That said, we can use this time to take advantage of our ability to assign tasks to GitHub Copilot which it can perform asynchronously, which we'll turn our attention to next!
+The creation of the codespace will take several minutes, although it's still far quicker than having to manually install all the services! That said, we can use this time to explore other features of GitHub Copilot, which we'll turn our attention to next!
 
 > [!IMPORTANT]
 > We will return to the codespace in a future exercise. For the time being, leave it open in a tab in your browser.
 
 ## Summary
 
-Congratulations, you have created a copy of the lab repository! You also began the creation process of your codespace, which you'll use when you begin writing code. We're going to return back to this after the next lesson, so don't worry.
+Congratulations, you have created a copy of the lab repository! You also began the creation process of your codespace, which you'll use when you begin writing code.
 
 ## Next step
 
-Since we've got a few minutes, let's get Copilot working on some tasks asynchronously for us! We can do this by [creating issues and assigning them to Copilot coding agent](./1-copilot-coding-agent.md).
+Let's explore how we can use Model Context Protocol (MCP) to interact with external services! We can do this by [setting up the backlog with Copilot agent mode and GitHub's MCP Server](./1-mcp.md).
 
 [codespaces]: https://github.com/features/codespaces
 [template-repository]: https://docs.github.com/repositories/creating-and-managing-repositories/creating-a-template-repository

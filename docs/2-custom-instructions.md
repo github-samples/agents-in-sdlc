@@ -1,4 +1,4 @@
-# Exercise 3 - Providing context to Copilot with instruction files
+# Exercise 2 - Providing context to Copilot with instruction files
 
 | [← Previous lesson: Model Context Protocol (MCP)][previous-lesson] | [Next lesson: Copilot agent mode →][next-lesson] |
 |:--|--:|
@@ -215,8 +215,8 @@ Next we'll use [agent mode to add functionality to the site][next-lesson].
 | [← Previous lesson: Model Context Protocol (MCP)][previous-lesson] | [Next lesson: Copilot agent mode →][next-lesson] |
 |:--|--:|
 
-[previous-lesson]: ./2-mcp.md
-[next-lesson]: ./4-copilot-agent-mode-vscode.md
+[previous-lesson]: ./1-mcp.md
+[next-lesson]: ./3-copilot-agent-mode-vscode.md
 [instruction-files]: https://code.visualstudio.com/docs/copilot/copilot-customization
 [python-type-hints]: https://docs.python.org/3/library/typing.html
 [games-endpoints]: ../server/routes/games.py

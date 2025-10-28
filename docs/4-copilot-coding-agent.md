@@ -1,6 +1,6 @@
-# Exercise 1 - GitHub Copilot coding agent
+# Exercise 4 - GitHub Copilot coding agent
 
-| [← Prerequisites][previous-lesson] | [Next lesson: MCP servers →][next-lesson] |
+| [← Previous lesson: Copilot agent mode][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
 |:--|--:|
 
 There are likely very few, if any, organizations who don't struggle with tech debt. This could be unresolved security issues, legacy code requiring updates, or feature requests which have languished on the backlog because we just didn't have the time to implement them. GitHub Copilot's coding agent is built to perform tasks such as updating code and adding functionality, all in an autonomous fashion. Once the agent completes its work, it generates a draft PR ready for a human developer to review. This allows offloading of tedious tasks and an acceleration of the development process, and frees developers to focus on larger picture items.
@@ -14,7 +14,7 @@ You'll explore the following with Copilot coding agent:
 
 ## Scenarios
 
-Tailspin Toys already has some tech debt they'd like to address. The contractors initially hired to create the first version of the site left the documentation in an unideal state - and by that we mean it's completely lacking. As a first step, they'd like to see docstrings or the equivalent added to all functions in the application.
+Tailspin Toys has some tech debt they'd like to address. The contractors initially hired to create the first version of the site left the documentation in an unideal state - and by that we mean it's completely lacking. As a first step, they'd like to see docstrings or the equivalent added to all functions in the application.
 
 Additionally, the design team is ready to get to work on building the UX for managing games. They don't need a full implementation yet, but they at least need some endpoints they can use for testing. Specifically, they need endpoints for the games API which will allow them to create, update and delete games. This is currently a blocker, but we have other issues which are of higher priority at the moment.
 
@@ -103,18 +103,17 @@ While every developer and organization understands the importance of documentati
     ```
 
 7. Select **Create** to create the issue.
-8. On the right side, select **Assignees** to open the searchbox for contributors to the repository.
-9. Select **Copilot** to assign the issue to Copilot.
+8. On the right side, select **Assign to Copilot** to open the assignment dialog.
 
-  ![Assigning Copilot to an issue](images/ex4-issue-assign.png)
+  ![Assigning Copilot to an issue](images/assign-copilot-coding-agent.png)
 
-10. Click somewhere else on the page to close the assignment window. Shortly after, you should see a set of 👀 on the issue description, indicating Copilot is on the job!
+9. Select **Assign**.
 
-  ![Copilot uses the eyes emoji to indicate it's working on the issue](images/ex4-issue-eyes.png)
+  ![Copilot assignment details](images/assign-copilot-coding-agent-details.png)
 
-11. Select the **Pull Requests** tab.
-12. Open the newly generated pull request (PR), which will be titled something similar to **[WIP]: Code lacks documentation**.
-13. After a few minutes, you should see that Copilot has created a todo list.
+10. Select the **Pull Requests** tab.
+11. Open the newly generated pull request (PR), which will be titled something similar to **[WIP]: Code lacks documentation**. If a new PR doesn't appear on the list, wait for a moment or two and refresh the browser window.
+12. After a few minutes, you should see that Copilot has created a todo list.
 
 > [!NOTE]
 > It make take several minutes for the todo list from Copilot to appear in the PR. Copilot is creating its environment (running the workflow highlighted previously), analyzing the project, and determining the best approach to tackling the problem.
@@ -152,15 +151,12 @@ As has been highlighted, one of the great advantages of GitHub Copilot coding ag
    - Before creating the PR, ensure all tests pass
    ```
 
-7. Note the level of guidance being provided to Copilot to help set everyone up for success. While Copilot could infer many of the points we added to the request, it helps to add them in explicitly. This limits the assumptions which need to be made, driving better code generation.
-8. Scroll towards the bottom of the dialog box to locate the **Assignee** button.
-9. Select **Assignee** to open the dialog box to select assignees.
-10. Select **Copilot** from the list.
+7. Select **Create** to create the issue.
+8. On the right side, select **Assign to Copilot** to open the assignment dialog.
 
-    ![Create issue and assign Copilot coding agent](images/create-issue-assign-copilot.png)
+  ![Assigning Copilot to an issue](images/assign-copilot-coding-agent.png)
 
-11. Select **Create** to save the issue.
-12. The newly created issue should now open.
+9. Select **Assign**.
 
 Shortly after, you should see a set of 👀 on the first comment in the issue, indicating Copilot is on the job!
 
@@ -172,14 +168,14 @@ Copilot is now diligently working on your second request! Copilot coding agent w
 
 This lesson explored [GitHub Copilot coding agent][copilot-agents], your AI peer programmer. With coding agent you can assign issues to Copilot to perform asynchronously. You can use Copilot to address tech debt, create new features, or aid in migrating code from one framework to another.
 
-You explored the these concepts:
+You explored these concepts:
 
 - customizing the environment for generating code.
 - ensuring operations are performed securely.
 - the importance of clearly scoped issues.
 - assigning issues to Copilot.
 
-With coding agent working diligently in the background, we can now turn our attention to our next lesson, [using MCP servers to interact with external services][next-lesson]. [Copilot coding agent can also use MCP servers][coding-agent-mcp], but we're going to switch back to our Codespace and try use MCP with Copilot agent mode.
+With coding agent working diligently in the background, we can now turn our attention to our next lesson, [creating and using custom agents][next-lesson]. [Copilot coding agent can also use MCP servers][coding-agent-mcp], and has custom instructions available to it, which we explored in earlier modules.
 
 ## Resources
 
@@ -189,7 +185,7 @@ With coding agent working diligently in the background, we can now turn our atte
 
 ---
 
-| [← Prerequisites][previous-lesson] | [Next lesson: MCP servers →][next-lesson] |
+| [← Previous lesson: Copilot agent mode][previous-lesson] | [Next lesson: Custom agents →][next-lesson] |
 |:--|--:|
 
 [coding-agent-overview]: https://docs.github.com/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot#overview-of-copilot-coding-agent
@@ -199,5 +195,5 @@ With coding agent working diligently in the background, we can now turn our atte
 [copilot-agents]: https://docs.github.com/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot
 [coding-agent-best-practices]: https://docs.github.com/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks
 [github-actions]: https://docs.github.com/actions
-[next-lesson]: ./2-mcp.md
-[previous-lesson]: ./0-prereqs.md
+[next-lesson]: ./5-custom-agents.md
+[previous-lesson]: ./3-copilot-agent-mode-vscode.md

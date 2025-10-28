@@ -1,6 +1,6 @@
-# Exercise 2 - Setting up the backlog with Copilot agent mode and GitHub's MCP Server
+# Exercise 1 - Setting up the backlog with Copilot agent mode and GitHub's MCP Server
 
-| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Custom instructions →][next-lesson] |
+| [← Prerequisites][previous-lesson] | [Next lesson: Custom instructions →][next-lesson] |
 |:--|--:|
 
 There's more to writing code than just writing code. Issues need to be filed, external services need to be called, and information needs to be gathered. Typically this involves interacting with external tools, which can break a developer's flow. Through the power of Model Context Protocol (MCP), you can access all of this functionality right from Copilot!
@@ -215,11 +215,11 @@ Notice that the setup process is similar to the GitHub MCP server, but you do no
 
 ---
 
-| [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Custom instructions →][next-lesson] |
+| [← Prerequisites][previous-lesson] | [Next lesson: Custom instructions →][next-lesson] |
 |:--|--:|
 
-[previous-lesson]: ./1-copilot-coding-agent.md
-[next-lesson]: ./3-custom-instructions.md
+[previous-lesson]: ./0-prereqs.md
+[next-lesson]: ./2-custom-instructions.md
 [prereqs-lesson]: ./0-prereqs.md
 [mcp-blog-post]: https://github.blog/ai-and-ml/llms/what-the-heck-is-mcp-and-why-is-everyone-talking-about-it/
 [github-mcp-server]: https://github.com/github/github-mcp-server

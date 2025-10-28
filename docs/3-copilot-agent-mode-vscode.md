@@ -1,6 +1,6 @@
-# Exercise 4 - Adding new functionality with Copilot Agent Mode
+# Exercise 3 - Adding new functionality with Copilot Agent Mode
 
-| [← Previous lesson: Custom instructions][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
+| [← Previous lesson: Custom instructions][previous-lesson] | [Next lesson: GitHub Copilot coding agent →][next-lesson] |
 |:--|--:|
 
 Even the simplest of updates to an application typically require updates to multiple files and operations to be performed like running tests. As a developer your flow typically involves tracking down all the necessary files, making the changes, running the tests, debugging, figuring out which file was missed, making another update... The list goes on and on.
@@ -194,11 +194,11 @@ As the list of games grows there will be a need for paging to be enabled. Using 
 
 ---
 
-| [← Previous lesson: Custom instructions][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
+| [← Previous lesson: Custom instructions][previous-lesson] | [Next lesson: GitHub Copilot coding agent →][next-lesson] |
 |:--|--:|
 
-[previous-lesson]: ./3-custom-instructions.md
-[next-lesson]: ./5-reviewing-coding-agent.md
+[previous-lesson]: ./2-custom-instructions.md
+[next-lesson]: ./4-copilot-coding-agent.md
 [coding-agent-101]: https://github.blog/ai-and-ml/github-copilot/agent-mode-101-all-about-github-copilots-powerful-mode/
 [choose-mode]: https://github.blog/ai-and-ml/github-copilot/copilot-ask-edit-and-agent-modes-what-they-do-and-when-to-use-them/
 [vs-code-agent-mode]: https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode
