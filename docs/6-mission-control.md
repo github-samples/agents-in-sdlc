@@ -3,7 +3,7 @@
 | [← Previous lesson: Custom agents][previous-lesson] | [Next lesson: Reviewing coding agent →][next-lesson] |
 |:--|--:|
 
-As the number of agents assigned to various tasks grows we need a centralized location to monitor and guide our agents. [Mission control][mission-control] is built to support supporting your agents.
+As the number of agents assigned to various tasks grows we need a centralized location to monitor and guide our agents. [Mission control][mission-control] is built to support your agents.
 
 From mission control you can see all sessions, past and present. You can explore the operations performed, and even redirect an in-progress session to help guide it.
 
