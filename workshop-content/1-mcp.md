@@ -9,7 +9,7 @@ There's more to writing code than just writing code. Issues need to be filed, ex
 
 You are a part-time developer for Tailspin Toys - a crowdfunding platform for board games with a developer theme. You've been assigned various tasks to introduce new functionality to the website. Being a good team member, you want to file issues to track your work. To help future you, you've decided to enlist the help of Copilot. You will set up your backlog of work for the rest of the lab, using GitHub Copilot Chat agent mode and the GitHub Model Context Protocol (MCP) server to create the issues for you. 
 
-To achieve this, you will:
+In this exercise, you will:
 
 - use Model Context Protocol (MCP), which provides access to external tools and capabilities.
 - set up the GitHub MCP server in your repository.
@@ -27,11 +27,12 @@ These tools and resources are accessed through an MCP server, which acts as a br
 
 ![Diagram showing the inner works of agent mode and how it interacts with context, LLM and tools - including tools contributed by MCP servers and VS Code extensions](images/ex1-mcp-diagram.png)
 
-Popular existing MCP servers include:
+A couple of popular existing MCP servers are:
 
 - **[GitHub MCP Server][github-mcp-server]**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests.
 - **[Playwright MCP Server][playwright-mcp-server]**: This server provides browser automation capabilities using Playwright. It allows the AI agent to perform actions such as navigating to web pages, filling out forms, and clicking buttons.
-- **Additional reference servers**: There are many other MCP servers available that provide access to different tools and resources. GitHub hosts an [MCP registry][mcp-registry], listing including reference, third-party, and community implementations. 
+
+There are many other MCP servers available that provide access to different tools and resources. GitHub hosts an [MCP registry][mcp-registry] to enhance discoverability and contributions to the ecosystem. 
 
 > [!IMPORTANT]
 > With regard to security, treat MCP servers as you would any other dependency in your project. Before using an MCP server, carefully review its source code, verify the publisher, and consider the security implications. Only use MCP servers that you trust and be cautious about granting access to sensitive resources or operations.
@@ -61,24 +62,23 @@ To access GitHub Copilot Chat agent mode, you need to have the GitHub Copilot Ch
 Once you have the extension installed, you may need to authenticate with your GitHub account to enable it.
 
 1. Return to your codespace.
-2. Select the **Copilot Chat** icon at the top of your codespace.
+2. If you don't already see Copilot Chat on the right side of your editor, select the **Copilot Chat** icon at the top of your codespace.
 3. Type a message like "Hello world" in the Copilot Chat window and press enter. This should activate Copilot Chat.
 4. Alternatively, if you are not authenticated you will be prompted to sign in to your GitHub account. Follow the instructions to authenticate.
 
     ![Example of Copilot Chat authentication prompt](images/ex1-copilot-authentication.png)
 
 5. After authentication, you should see the Copilot Chat window appear.
-
 6. Switch to agent mode by selecting the dropdown in the Copilot Chat window and selecting **Agent**.
 
     ![Example of switching to agent mode](images/ex1-agent-mode-dropdown.png)
 
-7. Set the model to **Claude Sonnet 4**.
+7. Set the model to **Claude Sonnet 4.5**.
 
-    ![Example of selecting the Claude Sonnet 4 model](images/ex1-select-model.png)
+    ![Example of selecting the Claude Sonnet 4.5 model](images/ex1-select-model.png)
 
 > [!IMPORTANT]
-> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude Sonnet 4, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
+> The authors of this workshop are not indicating a preference towards one model or another. When building this workshop, we used Claude Sonnet 4.5, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the workshop. This is perfectly normal and expected.
 
 8. The chat pane should update to indicate that you are now in agent mode. You should see a tools icon on the same line as the mode and model, which you utilized earlier, showing that you can configure tools for GitHub Copilot to use.
 
@@ -137,8 +137,7 @@ That's it! You can now use Copilot Chat in agent mode to create issues, manage p
 
 Now that you have set up the GitHub MCP server, you can use Copilot Agent mode to create a backlog of tasks for use in the rest of the lab.
 
-1. Return to the Copilot Chat pane. Ensure **Agent** is selected for the mode and **Claude Sonnet 4** is selected for the model.
-
+1. Return to the Copilot Chat pane. Ensure **Agent** is selected for the mode and **Claude Sonnet 4.5** is selected for the model.
 2. Type or paste the following prompt to create the issues you'll be working on in the lab:
 
     ```markdown
