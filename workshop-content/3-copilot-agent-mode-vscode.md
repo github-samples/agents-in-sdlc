@@ -7,7 +7,7 @@ Even the simplest of updates to an application typically require updates to mult
 
 This is where Copilot Agent Mode comes into play.
 
-Copilot Agent Mode is built to act more autonomously in your IDE. It behaves in a similar fashion to a developer, starting by exploring the existing project structure, performing the necessary updates, running tasks like tests, and automatically fixing any discovered mistakes. Let's explore how we can use Agent Mode to introduce new functionality to our site.
+Copilot Agent Mode is built to act more autonomously in your IDE. It behaves in a similar fashion to a developer, starting by exploring the existing project structure, performing the necessary updates, running tasks like tests, and automatically fixing any discovered mistakes. Let's explore how you can use Agent Mode to introduce new functionality to your site.
 
 > [!NOTE]
 > While the names are similar, agent mode and coding agent are built for two different types of experiences. Agent mode performs its tasks in your IDE, allowing for quick feedback cycles and interaction. Coding agent is designed as a peer programmer, working asynchronously like a member of the team, interacting with you via issues and pull requests.
@@ -24,15 +24,15 @@ As the list of games grows, you want to allow users to filter by category. This 
 
 ## Running the Tailspin Toys website
 
-Before we make any changes, let's explore the Tailspin Toys website to understand its current functionality. 
+Before you make any changes, let's explore the Tailspin Toys website to understand its current functionality. 
 
 The website is a crowdfunding platform for board games with a developer theme. It allows users to list games and display details about them. The website has two main components: the front-end (written in Svelte) and the backend (written in Python).
 
 ### Starting the website
 
-To make running the website easier, we have provided a script that will start both the front-end and back-end servers. You can run this script in your GitHub Codespace to start the website with the following instructions:
+To make running the website easier, a script has been provided that will start both the front-end and back-end servers. You can run this script in your GitHub Codespace to start the website with the following instructions:
 
-1. Return to your codespace. We'll continue working in your current branch.
+1. Return to your codespace. You'll continue working in your current branch.
 2. Open a new terminal window inside your codespace by selecting <kbd>Ctl</kbd> + <kbd>\`</kbd>.
 3. Run the following script to start the website:
 
@@ -99,7 +99,7 @@ To implement filtering, no less than three separate updates will need to be made
 - A new set of tests for the new endpoint
 - Updates to the UI to introduce the functionality
 
-In addition, the tests need to run (and pass) before we merge everything into our Codebase. Copilot Agent Mode can perform these tasks for us! Let's add the functionality.
+In addition, the tests need to run (and pass) before you merge everything into your codebase. Copilot Agent Mode can perform these tasks for you! Let's add the functionality.
 
 1. You can continue in the current conversation with Copilot, or start a new one by selecting **New Chat**.
 2. Select **Add Context**, **Instructions**, and **flask-endpoint .github/instructions**  as the instructions file.
@@ -111,7 +111,7 @@ In addition, the tests need to run (and pass) before we merge everything into ou
 
 3. Ensure **Agent** mode is still selected.
 4. Ensure **Claude Sonnet 4** is still selected for the model.
-5. Prompt Copilot to implement the functionality based on the issue we created earlier by using the following prompt:
+5. Prompt Copilot to implement the functionality based on the issue you created earlier by using the following prompt:
 
    ```plaintext
    Please update the site to include filtering by publisher and category based on the requirements from the related GitHub issue in the backlog. The server is already running, so you do not need to start it up.
@@ -140,9 +140,9 @@ In addition, the tests need to run (and pass) before we merge everything into ou
 9.  Return to the browser with the website running. Explore the new functionality!
 10. Once you've confirmed everything works and reviewed the code, select **Keep** in the Copilot Chat window.
 
-## Publish the branch
+## Publish the branch and create a pull request
 
-With our changes created locally we're ready to create a pull request (PR) to allow for our team to review our suggested changes and work through our DevOps process. The first step in that process is to publish the branch. Let's take care of that first.
+With your changes created locally you're ready to create a pull request (PR) to allow for your team to review your suggested changes and work through your DevOps process. The first step in that process is to publish the branch. Let's take care of that first.
 
 1. Navigate to the **Source Control** panel in the Codespace and review the changes made by Copilot.
 2. Stage the changes by selecting the **+** icon.
@@ -154,7 +154,7 @@ With our changes created locally we're ready to create a pull request (PR) to al
 
 ## Create the pull request
 
-There are several ways to create a pull request, including through github.com and the GitHub command-line interface (CLI). But since we're already working with GitHub Copilot, let's let it create the PR for us! We can have it find the relevant issue and create the PR with an association to the located issue. 
+There are several ways to create a pull request, including through github.com and the GitHub command-line interface (CLI). But since you're already working with GitHub Copilot, let's let it create the PR for you! You can have it find the relevant issue and create the PR with an association to the located issue. 
 
 1. Navigate to the Copilot Chat panel and select **New Chat** to start a new session.
 2. Ask Copilot to create a PR for you:

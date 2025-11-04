@@ -3,7 +3,7 @@
 | [← Previous lesson: Custom agents][previous-lesson] | [Next lesson: Iterating on coding agent's work →][next-lesson] |
 |:--|--:|
 
-As the number of agents assigned to various tasks grows we need a centralized location to monitor and guide our agents. [The agents page][agents-page] in Copilot HQ is built to support supporting your agents.
+As the number of agents assigned to various tasks grows you need a centralized location to monitor and guide your agents. [The agents page][agents-page] in Copilot HQ is built to support your agents.
 
 From this mission control you can see all sessions, past and present. You can explore the operations performed, and even steer an in-progress session to help guide it.
 
@@ -38,7 +38,7 @@ Let's start by seeing the tasks we've already assigned to GitHub Copilot coding 
 
 ## Steering coding agent
 
-Now that we've seen the sessions which are active, let's request Copilot include the light mode toggle while it works on the high-contrast mode.
+Now that you've seen the sessions which are active, let's request Copilot include the light mode toggle while it works on the high-contrast mode.
 
 1. Select the session which refers to adding a high contrast mode. The exact title will vary depending on the name Copilot uses and the current state of work.
 

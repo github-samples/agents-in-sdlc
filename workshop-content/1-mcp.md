@@ -38,9 +38,9 @@ Popular existing MCP servers include:
 
 ## Ensure your codespace is ready
 
-In a [prior exercise][prereqs-lesson] you launched the codespace you'll use for the remainder of the coding exercises in this lab. Let's put the final touches on it before we begin using it.
+In a [prior exercise][prereqs-lesson] you launched the codespace you'll use for the remainder of the coding exercises in this lab. Let's put the final touches on it before you begin using it.
 
-The setup process for the codespace installed and setup many [VS Code extensions][vscode-extensions]. As with any software, updates may be needed. When your codespace is created we'll need to ensure everything is up-to-date.
+The setup process for the codespace installed and setup many [VS Code extensions][vscode-extensions]. As with any software, updates may be needed. When your codespace is created you'll need to ensure everything is up-to-date.
 
 1. Return to the tab where you started your codespace. If you closed the tab, return to your repository, select **Code** > **Codespaces** and then the name of the codespace.
 2. Select **Extensions** on the workbench on the left side of your codespace.
@@ -80,9 +80,9 @@ Once you have the extension installed, you may need to authenticate with your Gi
 > [!IMPORTANT]
 > The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude Sonnet 4, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
 
-8. The chat pane should update to indicate that you are now in agent mode. You should see a tools icon on the same line as the mode and model, which you utilized earlier, showing that we can configure tools for GitHub Copilot to use.
+8. The chat pane should update to indicate that you are now in agent mode. You should see a tools icon on the same line as the mode and model, which you utilized earlier, showing that you can configure tools for GitHub Copilot to use.
 
-Typically, the number of tools available will be set to 0 when setting up a new project, as we have not configured any MCP servers yet. But to help you get started, we have created a **.vscode/mcp.json** file with an example configuration for the [GitHub MCP server][github-mcp-server]. Let's go and explore that next.
+Typically, the number of tools available will be set to 0 when setting up a new project, as you have not configured any MCP servers yet. But to help you get started, the project has a **.vscode/mcp.json** file with an example configuration for the [GitHub MCP server][github-mcp-server]. Let's go and explore that next.
 
 ## Setting up the GitHub MCP server
 
@@ -102,7 +102,7 @@ The **.vscode/mcp.json** file is used to configure the MCP servers that are avai
     }
     ```
 
-This configuration provides GitHub Copilot access to several additional tools so that it can interact with GitHub repositories, issues, pull requests, and more. This particular configuration uses the [remote GitHub MCP server][remote-github-mcp-server]. By using this approach, we don't need to worry about running the MCP server locally (and the associated management, like keeping it up to date), and we can authenticate to the remote server using OAuth 2.0 instead of a personal access token (PAT).
+This configuration provides GitHub Copilot access to several additional tools so that it can interact with GitHub repositories, issues, pull requests, and more. This particular configuration uses the [remote GitHub MCP server][remote-github-mcp-server]. By using this approach, you don't need to worry about running the MCP server locally (and the associated management, like keeping it up to date), and you can authenticate to the remote server using OAuth 2.0 instead of a personal access token (PAT).
 
 The MCP server configuration is defined in the **servers** section of the **mcp.json** file. Each MCP server is defined by a unique name (in this case, github) and its type (in this case, **http**). When using local MCP servers, the type may be **stdio** and have a **command** and **args** field to specify how to start the MCP server. You can find out more about the configuration format in the [VS Code documentation][vscode-mcp-config]. In some configurations (not for the remote GitHub MCP server with OAuth), you may also see an **inputs** section. This defines any inputs (like sensitive tokens) that the MCP server may require. You can read more about the configuration properties in the [VS Code documentation][vscode-mcp-config]
 
@@ -139,7 +139,7 @@ Now that you have set up the GitHub MCP server, you can use Copilot Agent mode t
 
 1. Return to the Copilot Chat pane. Ensure **Agent** is selected for the mode and **Claude Sonnet 4** is selected for the model.
 
-2. Type or paste the following prompt to create the issues we'll be working on in the lab:
+2. Type or paste the following prompt to create the issues you'll be working on in the lab:
 
     ```markdown
     In my GitHub repo, create GitHub issues for our Tailspin Toys backlog. Each issue should include:
@@ -178,7 +178,7 @@ Now that you have set up the GitHub MCP server, you can use Copilot Agent mode t
 9. In a separate browser tab, navigate to your GitHub repository and select the issues tab.
 10. You should see a list of issues that have been created by Copilot. Each issue should include a clear title and a checkbox list of acceptance criteria.
 
-You should notice that the issues are fairly detailed. This is where we benefit from the power of Large Language Models (LLMs) and Model Context Protocol (MCP), as it has been able to create a clear initial issue description.
+You should notice that the issues are fairly detailed. This is where you benefit from the power of Large Language Models (LLMs) and Model Context Protocol (MCP), as it has been able to create a clear initial issue description.
 
 ![Example of issues created in GitHub](images/ex1-github-issues-created.png)
 
@@ -186,7 +186,7 @@ You should notice that the issues are fairly detailed. This is where we benefit 
 
 Congratulations, you have created issues on GitHub using Copilot Chat and MCP!
 
-To recap, in this exercise we:
+To recap, in this exercise you:
 
 - used Model Context Protocol (MCP), which provides access to external tools and capabilities.
 - set up the GitHub MCP server in your repository.

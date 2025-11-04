@@ -3,7 +3,7 @@
 | [← Previous lesson: Model Context Protocol (MCP)][previous-lesson] | [Next lesson: Copilot agent mode →][next-lesson] |
 |:--|--:|
 
-Context is key across many aspects of life, and when working with generative AI. If you're performing a task which needs to be completed a particular way, or if a piece of background information is important, we want to ensure Copilot has access to that information. We can use [instruction files][instruction-files] to provide guidance so that Copilot not only understands what we want it to do but also how we want it to be done.
+Context is key across many aspects of life, and when working with generative AI. If you're performing a task which needs to be completed a particular way, or if a piece of background information is important, you want to ensure Copilot has access to that information. You can use [instruction files][instruction-files] to provide guidance so that Copilot not only understands what you want it to do but also how you want it to be done.
 
 In this exercise, you will learn how to:
 
@@ -11,8 +11,8 @@ In this exercise, you will learn how to:
 - provide path instruction files to guide Copilot for repetitive or templated tasks on specific types of files.
 - implement both repository-wide instructions and task-specific instructions.
 
-> [!NOTE]
-> There are other types of files which can be used to provide context or guidance to Copilot currently in preview. This workshop currently focused on generally available features.
+> [!IMPORTANT]
+> Note that the code generated may diverge from some of the standards you set. AI tools like Copilot are non-deterministic, and may not always provide the same result. The other files in the codebase do not contain docstrings or comment headers, which could lead Copilot in another direction. Consistency is key, so making sure that your code follows the established patterns is important. You can always follow-up in chat and ask Copilot to follow your coding standards, which will help guide it in the right direction.
 
 ## Scenario
 
@@ -27,7 +27,7 @@ Through the use of instruction files you'll ensure Copilot has the right informa
 
 ## Before you begin
 
-We're going to be making some code changes, so we should follow our usual practice of creating a new branch to work in. This will allow us to make changes without affecting the main branch until we're ready.
+You're going to be making some code changes, so you should follow the usual practice of creating a new branch to work in. This will allow you to make changes without affecting the main branch until you're ready.
 
 1. Return to your codespace from the previous exercise.
 2. Open a new terminal window inside your codespace by selecting <kbd>Ctl</kbd>+<kbd>\`</kbd>.
@@ -53,10 +53,10 @@ There are two types of instructions files:
 
 ## Use GitHub Copilot Chat before updating custom instructions
 
-To see the impact of custom instructions, we will start by sending a prompt with the current version of the files. We'll then make some updates, send the same prompt again, and note the difference.
+To see the impact of custom instructions, you'll start by sending a prompt with the current version of the files. You'll then make some updates, send the same prompt again, and note the difference.
 
 1. Return to your codespace.
-2. Close any open files in your codespace from the previous exercises. This will ensure Copilot has the context we want it to have.
+2. Close any open files in your codespace from the previous exercises. This will ensure Copilot has the context you want it to have.
 3. Open `server/routes/publishers.py`, an empty file.
 4. If **Copilot chat** is not already open, open it by selecting the Copilot icon towards the top of your codespace.
 5. Create a new chat session by typing `/clear` into the chat window and selecting <kbd>Enter</kbd> (or <kbd>return</kbd> on a Mac).
@@ -68,11 +68,11 @@ To see the impact of custom instructions, we will start by sending a prompt with
    ```
 
 8. Copilot explores the project to learn how best to implement the code, and generates a list of suggestions, which may include code for `publishers.py`, `app.py`, and tests to ensure the new code runs correctly.
-9.  Explore the code, noticing the generated code includes [type hints][python-type-hints] because, as we'll see, our custom instructions includes the directive to include them.
+9.  Explore the code, noticing the generated code includes [type hints][python-type-hints] because, as you'll see, the custom instructions includes the directive to include them.
 10. Notice the generated code **is missing** either a docstring or a comment header - or both!
 
 > [!IMPORTANT]
-> As highlighted previously, GitHub Copilot and LLM tools are probabilistic, not deterministic. As a result, the exact code generated may vary, and there's even a chance it'll abide by our rules without us spelling it out! But to aid consistency in code we should always document anything we want to ensure Copilot should understand about how we want our code generated.
+> As highlighted previously, GitHub Copilot and LLM tools are probabilistic, not deterministic. As a result, the exact code generated may vary, and there's even a chance it'll abide by your rules without you spelling it out! But to aid consistency in code you should always document anything you want to ensure Copilot should understand about how you want your code generated.
 
 ## Add repository standards to copilot-instructions.md
 
@@ -80,8 +80,8 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
 
 1. Return to your codespace.
 2. Open `.github/copilot-instructions.md`.
-3. Explore the file, noting the brief description of the project and sections for **Code standards**, **Scripts** and **GitHub Actions Workflows**. These are applicable to any interactions we'd have with Copilot, are robust, and provide clear guidance on what we're doing and how we want to accomplish it.
-4. Locate the **Code formatting requirements** section, which should be around line 23. Note how it contains a note to use type hints. That's why we saw those in the code generated previously.
+3. Explore the file, noting the brief description of the project and sections for **Code standards**, **Scripts** and **GitHub Actions Workflows**. These are applicable to any interactions you'd have with Copilot, are robust, and provide clear guidance on what you're doing and how you want to accomplish it.
+4. Locate the **Code formatting requirements** section, which should be around line 23. Note how it contains a note to use type hints. That's why you saw those in the code generated previously.
 5. Add the following lines of markdown right below the note about type hints to instruct Copilot to add comment headers to files and docstrings (which should be near line 18):
 
    ```markdown
@@ -118,8 +118,9 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
    """
    ```
 
-12. Also note how the existing code isn't updated, but of course we could ask Copilot to perform that operation if we so desired!
-13. **Don't implement the suggested changes**, as we will be doing that in the next section.
+11. Notice the generated code now includes a docstring as well as a comment block at the top!
+12. Also note how the existing code isn't updated, but of course you could ask Copilot to perform that operation if you so desired!
+13. **Don't implement the suggested changes**, as you'll be doing that in the next section.
 
 > [!NOTE]
 > If you accepted the changes, you can always select the **Undo** button towards the top right of the Copilot chat window.
@@ -130,7 +131,9 @@ From this section, you explored how the custom instructions file has provided Co
 
 Coding is often repetitive, with developers performing similar tasks on a regular basis. Copilot is wonderful for allowing you to offload these types of tasks. But these types of tasks, like adding an endpoint, creating a component, or adding a new service pattern implementation often require a particular template or structure to be followed. Instruction files allow you to provide specific requirements for these types of tasks. They can be added manually when using Copilot Chat, or can have an **applyTo:** tag added to the top of the file to have Copilot automatically use them for specific files.
 
-We want to create a new endpoint to list all publishers, and to follow the same pattern we used for the existing [games endpoints][games-endpoints], and to create tests which follow the same pattern as the existing [games endpoints tests][games-tests]. An instruction file has already been created; let's explore it and see the difference in code it generates.
+## Create a task-specific custom instructions file
+
+You want to create a new endpoint to list all publishers, and to follow the same pattern used for the existing [games endpoints][games-endpoints], and to create tests which follow the same pattern as the existing [games endpoints tests][games-tests]. An instruction file has already been created; let's explore it and see the difference in code it generates.
 
 1. Open `.github/instructions/python-tests.instructions.md`.
 2. Note the `applyTo:` section at the top, which contains a filter for all files in the `server/tests` directory which start with `test_` and have a `.py` extension. Whenever Copilot Chat interacts with a file which matches this pattern it will automatically use the guidance provided in this file.
@@ -140,7 +143,7 @@ We want to create a new endpoint to list all publishers, and to follow the same 
 
    - an overview of requirements, including that tests must be created, and endpoints are created in Flask using blueprints.
    - a link to another the previously mentioned `python-tests.instructions.md` file.
-   - links to two existing files which follow the patterns we want - both the games blueprint and tests. Notice how these are setup as normal markdown links, allowing an instruction file to incorporate additional files for context.
+   - links to two existing files which follow the patterns you want - both the games blueprint and tests. Notice how these are setup as normal markdown links, allowing an instruction file to incorporate additional files for context.
 
 6. Return to `server/routes/publishers.py` to ensure focus is set correctly.
 7. Return to Copilot Chat and select **New Chat** to start a new session.
@@ -223,4 +226,3 @@ Next we'll use [agent mode to add functionality to the site][next-lesson].
 [games-tests]: ../server/tests/test_games.py
 [instructions-best-practices]: https://docs.github.com/en/enterprise-cloud@latest/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
 [personal-instructions]: https://docs.github.com/en/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
-
