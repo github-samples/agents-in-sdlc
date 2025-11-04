@@ -71,5 +71,4 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
   - `src/styles/`: CSS and Tailwind configuration
 - `scripts/`: Development and deployment scripts
 - `data/`: Database files
-- `docs/`: Project documentation
 - `README.md`: Project documentation

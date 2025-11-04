@@ -4,7 +4,7 @@ This repository contains the project for a 1 hour guided workshop to explore Git
 
 ## Start the workshop
 
-**To begin the workshop, start at [docs/README.md](./docs/README.md)**
+**To begin the workshop, start at [workshop-content/README.md](./workshop-content/README.md)**
 
 Or, if just want to run the app...
 
