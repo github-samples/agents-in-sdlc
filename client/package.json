@@ -10,10 +10,10 @@
     "test:e2e": "npx playwright install && npx playwright test"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.5",
     "@astrojs/node": "^9.4.6",
     "@astrojs/svelte": "^7.1.0",
-    "@tailwindcss/vite": "^4.1.14",
+    "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.12.3",
     "svelte": "^5.38.7",
     "typescript": "^5.9.3"
