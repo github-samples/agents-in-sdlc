@@ -9,11 +9,15 @@
         "devcontainer",
         "devcontainers",
         "docstrings",
+        "dotnettools",
         "isouter",
         "prebuild",
+        "pylance",
+        "schlich",
         "SDLC"
     ],
     "github.copilot.nextEditSuggestions.enabled": true,
     "editor.tabSize": 4,
-    "chat.agent.enabled": true
+    "chat.agent.enabled": true,
+    "chat.agent.maxRequests": 100,
 }

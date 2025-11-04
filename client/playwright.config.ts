@@ -20,9 +20,9 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'list',
+  reporter: process.env.CI ? 'github' : 'list',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -30,6 +30,18 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    
+    /* Take screenshot only on failure */
+    screenshot: 'only-on-failure',
+    
+    /* Record video only on failure */
+    video: 'retain-on-failure',
+    
+    /* Default timeout for actions */
+    actionTimeout: 10000,
+    
+    /* Default timeout for navigation */
+    navigationTimeout: 15000,
   },
 
   /* Configure projects for major browsers */
@@ -44,7 +56,7 @@ export default defineConfig({
   webServer: {
     command: '../scripts/start-app.sh',
     url: 'http://localhost:4321',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true, // Always reuse existing server if available
     timeout: 120 * 1000, // 2 minutes to allow for setup
   },
 });

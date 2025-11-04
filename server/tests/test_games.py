@@ -2,7 +2,7 @@ import unittest
 import json
 from typing import Dict, List, Any, Optional
 from flask import Flask, Response
-from models import Game, Publisher, Category, db, init_db
+from models import Game, Publisher, Category, db
 from routes.games import games_bp
 
 class TestGamesRoutes(unittest.TestCase):
@@ -52,7 +52,7 @@ class TestGamesRoutes(unittest.TestCase):
         self.client = self.app.test_client()
         
         # Initialize in-memory database for testing
-        init_db(self.app, testing=True)
+        db.init_app(self.app)
         
         # Create tables and seed data
         with self.app.app_context():

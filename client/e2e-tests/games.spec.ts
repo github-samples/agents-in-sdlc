@@ -4,36 +4,35 @@ test.describe('Game Listing and Navigation', () => {
   test('should display games with titles on index page', async ({ page }) => {
     await page.goto('/');
     
-    // Wait for the games to load
-    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    // Wait for the games to load using a more specific locator
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
     
     // Check that games are displayed
-    const gameCards = page.locator('[data-testid="game-card"]');
+    const gameCards = page.getByTestId('game-card');
     
     // Wait for at least one game card to be visible
     await expect(gameCards.first()).toBeVisible();
     
     // Check that we have at least one game
-    const gameCount = await gameCards.count();
-    expect(gameCount).toBeGreaterThan(0);
+    expect(await gameCards.count()).toBeGreaterThan(0);
     
     // Check that each game card has a title
-    const firstGameCard = gameCards.first();
-    await expect(firstGameCard.locator('[data-testid="game-title"]')).toBeVisible();
+    await expect(gameCards.first().getByTestId('game-title')).toBeVisible();
     
     // Verify that game titles are not empty
-    const gameTitle = await firstGameCard.locator('[data-testid="game-title"]').textContent();
-    expect(gameTitle?.trim()).toBeTruthy();
+    await expect(gameCards.first().getByTestId('game-title')).not.toBeEmpty();
   });
 
   test('should navigate to correct game details page when clicking on a game', async ({ page }) => {
     await page.goto('/');
     
     // Wait for games to load
-    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    const gamesGrid = page.getByTestId('games-grid');
+    await expect(gamesGrid).toBeVisible();
     
     // Get the first game card and its data attributes
-    const firstGameCard = page.locator('[data-testid="game-card"]').first();
+    const firstGameCard = page.getByTestId('game-card').first();
     const gameId = await firstGameCard.getAttribute('data-game-id');
     const gameTitle = await firstGameCard.getAttribute('data-game-title');
     
@@ -44,11 +43,12 @@ test.describe('Game Listing and Navigation', () => {
     await expect(page).toHaveURL(`/game/${gameId}`);
     
     // Verify the game details page loads
-    await page.waitForSelector('[data-testid="game-details"]', { timeout: 10000 });
+    await expect(page.getByTestId('game-details')).toBeVisible();
     
     // Verify the title matches what we clicked on
-    const detailsTitle = page.locator('[data-testid="game-details-title"]');
-    await expect(detailsTitle).toHaveText(gameTitle || '');
+    if (gameTitle) {
+      await expect(page.getByTestId('game-details-title')).toHaveText(gameTitle);
+    }
   });
 
   test('should display game details with all required information', async ({ page }) => {
@@ -56,35 +56,31 @@ test.describe('Game Listing and Navigation', () => {
     await page.goto('/game/1');
     
     // Wait for game details to load
-    await page.waitForSelector('[data-testid="game-details"]', { timeout: 10000 });
+    await expect(page.getByTestId('game-details')).toBeVisible();
     
     // Check that the game title is present and not empty
-    const gameTitle = page.locator('[data-testid="game-details-title"]');
+    const gameTitle = page.getByTestId('game-details-title');
     await expect(gameTitle).toBeVisible();
-    const titleText = await gameTitle.textContent();
-    expect(titleText?.trim()).toBeTruthy();
+    await expect(gameTitle).not.toBeEmpty();
     
     // Check that the game description is present and not empty
-    const gameDescription = page.locator('[data-testid="game-details-description"]');
+    const gameDescription = page.getByTestId('game-details-description');
     await expect(gameDescription).toBeVisible();
-    const descriptionText = await gameDescription.textContent();
-    expect(descriptionText?.trim()).toBeTruthy();
+    await expect(gameDescription).not.toBeEmpty();
     
     // Check that either publisher or category (or both) are present
-    const publisherExists = await page.locator('[data-testid="game-details-publisher"]').isVisible();
-    const categoryExists = await page.locator('[data-testid="game-details-category"]').isVisible();
-    expect(publisherExists && categoryExists).toBeTruthy();
+    const publisherExists = await page.getByTestId('game-details-publisher').isVisible();
+    const categoryExists = await page.getByTestId('game-details-category').isVisible();
+    expect(publisherExists || categoryExists).toBeTruthy();
     
     // If publisher exists, check it has content
     if (publisherExists) {
-      const publisherText = await page.locator('[data-testid="game-details-publisher"]').textContent();
-      expect(publisherText?.trim()).toBeTruthy();
+      await expect(page.getByTestId('game-details-publisher')).not.toBeEmpty();
     }
     
     // If category exists, check it has content
     if (categoryExists) {
-      const categoryText = await page.locator('[data-testid="game-details-category"]').textContent();
-      expect(categoryText?.trim()).toBeTruthy();
+      await expect(page.getByTestId('game-details-category')).not.toBeEmpty();
     }
   });
 
@@ -92,10 +88,10 @@ test.describe('Game Listing and Navigation', () => {
     await page.goto('/game/1');
     
     // Wait for game details to load
-    await page.waitForSelector('[data-testid="game-details"]', { timeout: 10000 });
+    await expect(page.getByTestId('game-details')).toBeVisible();
     
     // Check that the back game button is present
-    const backButton = page.locator('[data-testid="back-game-button"]');
+    const backButton = page.getByTestId('back-game-button');
     await expect(backButton).toBeVisible();
     await expect(backButton).toContainText('Support This Game');
     
@@ -107,25 +103,24 @@ test.describe('Game Listing and Navigation', () => {
     await page.goto('/game/1');
     
     // Wait for the page to load
-    await page.waitForSelector('[data-testid="game-details"]', { timeout: 10000 });
+    await expect(page.getByTestId('game-details')).toBeVisible();
     
-    // Find and click the back to all games link
-    const backLink = page.locator('a:has-text("Back to all games")');
+    // Find and click the back to all games link using a more semantic locator
+    const backLink = page.getByRole('link', { name: /back to all games/i });
     await expect(backLink).toBeVisible();
     await backLink.click();
     
     // Verify we're back on the home page
     await expect(page).toHaveURL('/');
-    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    await expect(page.getByTestId('games-grid')).toBeVisible();
   });
 
   test('should handle navigation to non-existent game gracefully', async ({ page }) => {
     // Navigate to a game that doesn't exist
-    await page.goto('/game/99999');
+    const response = await page.goto('/game/99999');
     
-    // The page should load without crashing
-    // Check if there's an error message or if it handles gracefully
-    await page.waitForTimeout(3000);
+    // Check the response status or ensure the page loads without crashing
+    expect(response?.status()).toBeLessThan(500);
     
     // The page should either show an error or handle it gracefully
     // We expect the page to not crash and still have a valid title

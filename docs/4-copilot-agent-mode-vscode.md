@@ -7,7 +7,10 @@ Even the simplest of updates to an application typically require updates to mult
 
 This is where Copilot Agent Mode comes into play.
 
-Copilot Agent Mode is built to act more autonomously. It behaves in a similar fashion to a developer, starting by exploring the existing project structure, performing the necessary updates, running tasks like tests, and automatically fixing any discovered mistakes. Let's explore how we can use Agent Mode to introduce new functionality to our site.
+Copilot Agent Mode is built to act more autonomously in your IDE. It behaves in a similar fashion to a developer, starting by exploring the existing project structure, performing the necessary updates, running tasks like tests, and automatically fixing any discovered mistakes. Let's explore how we can use Agent Mode to introduce new functionality to our site.
+
+> [!NOTE]
+> While the names are similar, agent mode and coding agent are built for two different types of experiences. Agent mode performs its tasks in your IDE, allowing for quick feedback cycles and interaction. Coding agent is designed as a peer programmer, working asynchronously like a member of the team, interacting with you via issues and pull requests.
 
 In this exercise, you will learn how:
 
@@ -30,7 +33,7 @@ The website is a crowdfunding platform for board games with a developer theme. I
 To make running the website easier, we have provided a script that will start both the front-end and back-end servers. You can run this script in your GitHub Codespace to start the website with the following instructions:
 
 1. Return to your codespace. We'll continue working in your current branch.
-2. Open a new terminal window inside your codespace by selecting <kbd>Ctl</kbd>+<kbd>\`</kbd>.
+2. Open a new terminal window inside your codespace by selecting <kbd>Ctl</kbd> + <kbd>\`</kbd>.
 3. Run the following script to start the website:
 
    ```bash
@@ -47,7 +50,7 @@ To make running the website easier, we have provided a script that will start bo
 > [!NOTE]
 > If a dialog box opens prompting you to open a browser window for http://localhost:5100 close it by selecting the **x**.
 
-4. Open the website by using <kbd>Ctrl</kbd>-**Click** (or <kbd>Cmd</kbd>-**Click** on a Mac) on the client address (http://localhost:4321) in the terminal.
+4. Open the website by using <kbd>Ctrl</kbd>-**Click** (or <kbd>Cmd</kbd>-**Click** on a Mac) on the client address `http://localhost:4321` in the terminal.
 
 > [!NOTE]
 > When using a codespace, selecting a link for the localhost URL from the Codespace terminal will automatically redirect you to `https://<your-codespace-name>-4321.app.github.dev/`. This is a private tunnel to your codespace, which is now hosting your web server!
@@ -67,21 +70,18 @@ The initial implementation of the website is functional, but we want to enhance 
 2. Open **Copilot Chat**.
 3. Create a new chat session by selecting the **New Chat** button, which will remove any previous context.
 4. Ensure **Agent** is selected from the list of modes.
-
-   ![Screenshot of the Copilot Chat panel showing the Agent Mode dropdown](images/copilot-agent-mode-dropdown.png)
-
-5. Select **Claude 3.5 Sonnet** from the list of available models.
+5. Select **Claude Sonnet 4** from the list of available models.
 
 > [!IMPORTANT]
-> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude 3.5, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
+> The authors of this lab are not indicating a preference towards one model or another. When building this lab, we used Claude Sonnet 4, and as such are including that in the instructions. The hope is the code suggestions you receive will be relatively consistent to ensure a good experience. However, because LLMs are probabilistic, you may notice the suggestions received differ from what is indicated in the lab. This is perfectly normal and expected.
 
-5. Ask Copilot about the backlog of issues by sending the following prompt to Copilot, replacing **<YOUR_REPOSITORY_PATH>** with the organization/name of your repository which you noted earlier:
+1. Ask Copilot about the backlog of issues by sending the following prompt to Copilot:
 
    ```plaintext
-   Please show me the backlog of items from my repository at <YOUR_REPOSITORY_PATH>. Help me prioritize them based on those which will be most useful to the user.
+   Please show me the backlog of items from my GitHub repository. Help me prioritize them based on those which will be most useful to the user.
    ```
 
-6. Notice GitHub Copilot (likely) identifies **list_issues** as the MCP command to run to access the right information.
+2. Notice GitHub Copilot (likely) identifies `list_issues` or `search_issues` as the MCP command to run to access the right information.
 
 > [!NOTE]
 > Because of the probabilistic nature of LLMs, Copilot may utilize a different MCP command, but should still be able to complete the task.
@@ -110,14 +110,11 @@ In addition, the tests need to run (and pass) before we merge everything into ou
 > Even though Copilot agent mode may have discovered this file on its own, if you're aware of an important piece of information, like a **.instructions.md** file, then absolutely add it to Copilot's context. This helps set Copilot (and you) up for success.
 
 3. Ensure **Agent** mode is still selected.
-
-   ![Screenshot showing an example of switching to Agent Mode](images/copilot-agent-mode-dropdown.png)
-
-4. Ensure **Claude 3.5** is still selected for the model.
-5. Prompt Copilot to implement the functionality based on the issue we created earlier by using the following prompt, replacing **<YOUR_REPOSITORY_PATH>** with the organization/name of your repository which you noted earlier:
+4. Ensure **Claude Sonnet 4** is still selected for the model.
+5. Prompt Copilot to implement the functionality based on the issue we created earlier by using the following prompt:
 
    ```plaintext
-   Please update the site to include filtering by publisher and category based on the requirements from the related GitHub issue in the backlog of <YOUR_REPOSITORY_PATH>.
+   Please update the site to include filtering by publisher and category based on the requirements from the related GitHub issue in the backlog. The server is already running, so you do not need to start it up.
    ```
 
 6. Watch as Copilot begins by exploring the project, locating the files associated with the desired functionality. You should see it finding both the API and UI definitions, as well as the tests. It then begins modifying the files and running the tests.
@@ -160,10 +157,10 @@ With our changes created locally we're ready to create a pull request (PR) to al
 There are several ways to create a pull request, including through github.com and the GitHub command-line interface (CLI). But since we're already working with GitHub Copilot, let's let it create the PR for us! We can have it find the relevant issue and create the PR with an association to the located issue. 
 
 1. Navigate to the Copilot Chat panel and select **New Chat** to start a new session.
-2. Ask Copilot to create a PR for you, replacing **<YOUR_REPOSITORY_PATH>** with the organization/name of your repository which you noted earlier:
+2. Ask Copilot to create a PR for you:
 
    ```plaintext
-   Find the issue related to filtering by category and publisher on <YOUR_REPOSITORY_PATH>. Create a new pull request for the current add-filters branch, and associate it with the correct issue.
+   Find the issue in the repo related to filtering by category and publisher. Create a new pull request for the current add-filters branch, and associate it with the correct issue.
    ```
 
 3. As needed, select **Continue** to allow Copilot to perform the tasks necessary to gather information and perform operations.
@@ -192,8 +189,7 @@ As the list of games grows there will be a need for paging to be enabled. Using 
 ## Resources
 
 - [Coding agent 101][coding-agent-101]
-- [Copilot ask, edit, and agent modes: What they do and when to use them
-][choose-mode]
+- [Copilot ask, edit, and agent modes: What they do and when to use them][choose-mode]
 - [Agent mode in VS Code][vs-code-agent-mode]
 
 ---

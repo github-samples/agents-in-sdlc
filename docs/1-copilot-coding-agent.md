@@ -28,13 +28,15 @@ These are both examples of tasks which can quickly find themselves deprioritized
 
 While it can often feel like it, there is no magic in GitHub Copilot. There are no magic solutions available, where you can with just a couple of sentences snap your fingers and let AI perform the entire task for you. In fact, even seemingly straight-forward operations can often have fair amount of complexity when we peel back the layers.
 
-As a result, we want to [be mindful about how we approach assigning tasks to Copilot coding agent][coding-agent-best-practices], and that working with Copilot as an AI pair programmer is typically the best approach. The approach you take tasks big and small is the same with or without Copilot - work in stages, learn, experiment, and adapt accordingly. As always, the fundamentals of software development do not change with the addition of generative AI.
+As a result, we want to [be mindful about how we approach assigning tasks to Copilot coding agent][coding-agent-best-practices]. Working with Copilot as an AI pair programmer is typically the best approach. Approach tasks, big and small, following the same strategy you would without Copilot - work in stages, learn, experiment, and adapt accordingly.
+
+As always, the fundamentals of software development do not change with the addition of generative AI.
 
 ## Setting up the dev environment for the Copilot coding agent
 
 Creating code, regardless of who's involved, typically requires a specific environment and some setup scripts to be run to ensure everything is in a good state. This holds true when assigning tasks to Copilot, which is performing tasks in a similar fashion to a SWE.
 
-[Copilot coding agent supports a special workflow][setup-workflow], set in the **.github/workflows/copilot-setup-steps.yml** file, to run before it gets to work. This enables it to have access to the required development tools and dependencies. We pre-configured this ahead of the lab to help the lab flow and allow this learning opportunity. It makes sure that Copilot had access to Python, Node.JS, and the required dependencies for the client and server:
+Coding agent uses [GitHub Actions][github-actions] for its environment when doing its work. You can customize this environment by creating a [special setup workflow][setup-workflow], configured in the **.github/workflows/copilot-setup-steps.yml** file, to run before it gets to work. This enables it to have access to the required development tools and dependencies. We pre-configured this ahead of the lab to help the lab flow and allow this learning opportunity. It makes sure that Copilot had access to Python, Node.JS, and the required dependencies for the client and server:
 
 ```yaml
 name: "Copilot Setup Steps"
@@ -47,16 +49,15 @@ jobs:
     runs-on: ubuntu-latest
     # Set the permissions to the lowest permissions possible needed for *your steps*. Copilot will be given its own token for its operations.
     permissions:
-      # If you want to clone the repository as part of your setup steps, for example to install dependencies, you'll need the `contents: read` permission.
-      # If you don't clone the repository in your setup steps, Copilot will do this for you automatically after the steps complete.
+      # If you want to clone the repository as part of your setup steps, for example to install dependencies, you'll need the `contents: read` permission. If you don't clone the repository in your setup steps, Copilot will do this for you automatically after the steps complete.
       contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # Backend setup - Python
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: "pip"
@@ -66,7 +67,7 @@ jobs:
 
       # Frontend setup - Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "22"
           cache: "npm"
@@ -75,6 +76,10 @@ jobs:
       - name: Install JavaScript dependencies
         working-directory: ./client
         run: npm ci
+
+      - name: Install Playwright
+        working-directory: ./client
+        run: npx playwright install
 ```
 
 It looks like any other GitHub workflow file, but it has a few key points:
@@ -103,19 +108,22 @@ While every developer and organization understands the importance of documentati
 
   ![Assigning Copilot to an issue](images/ex4-issue-assign.png)
 
-10. Click somewhere else on the page to close the assignment window. Shortly after, you should see a set of 👀 on the first comment in the issue, indicating Copilot is on the job!
+10. Click somewhere else on the page to close the assignment window. Shortly after, you should see a set of 👀 on the issue description, indicating Copilot is on the job!
 
   ![Copilot uses the eyes emoji to indicate it's working on the issue](images/ex4-issue-eyes.png)
 
 11. Select the **Pull Requests** tab.
-12. Open the newly generated issue, which will be titled something similar to **[WIP]: Code lacks documentation**.
+12. Open the newly generated pull request (PR), which will be titled something similar to **[WIP]: Code lacks documentation**.
 13. After a few minutes, you should see that Copilot has created a todo list.
-14. Review the list and the tasks it's going to complete.
-15.  Scroll down the pull request timeline, and you should see an update that Copilot has started working on the issue.
-16.  Select the **View session** button.
+
+> [!NOTE]
+> It make take several minutes for the todo list from Copilot to appear in the PR. Copilot is creating its environment (running the workflow highlighted previously), analyzing the project, and determining the best approach to tackling the problem.
+
+14.  Review the list and the tasks it's going to complete.
+15.   Scroll down the pull request timeline, and you should see an update that Copilot has started working on the issue.
+16.   Select the **View session** button.
 
   ![Copilot session view](images/ex4-view-session.png)
-
 
 > [!IMPORTANT]
 > You may need to refresh the window to see the updated indicator.
@@ -144,7 +152,7 @@ As has been highlighted, one of the great advantages of GitHub Copilot coding ag
    - Before creating the PR, ensure all tests pass
    ```
 
-7. Note the level of guidance being provided to Copilot to help set everyone up for success.
+7. Note the level of guidance being provided to Copilot to help set everyone up for success. While Copilot could infer many of the points we added to the request, it helps to add them in explicitly. This limits the assumptions which need to be made, driving better code generation.
 8. Scroll towards the bottom of the dialog box to locate the **Assignee** button.
 9. Select **Assignee** to open the dialog box to select assignees.
 10. Select **Copilot** from the list.
@@ -158,20 +166,7 @@ Shortly after, you should see a set of 👀 on the first comment in the issue, i
 
 ![Copilot uses the eyes emoji to indicate it's working on the issue](images/ex4-issue-eyes.png)
 
-> [!IMPORTANT]
-> You may need to refresh the window to see the updated indicator.
-
-13. Select the **Pull Requests** tab.
-14. Open the newly generated PR, which will be titled something similar to **[WIP]: Add endpoints to create and edit games**.
-15. After a few minutes, Copilot will update the PR with a checklist of the tasks its going to perform. It will use this checklist to indicate to the outside world its progress.
-16. Scroll down the pull request timeline, and you should see an update that Copilot has started working on the issue.
-17. Select the **View session** button.
-
-    ![Copilot session view](images/ex4-view-session.png)
-
-18. Notice that you can scroll through the live session, and how Copilot is solving the problem. That includes exploring the code and understanding the state, how Copilot pauses to think and decide on the appropriate plan and also creating code.
-
-Copilot is now diligently working on your request! Copilot coding agent works in a similar fashion to a SWE, so we don't need to actively monitor it, but instead review once it's completed. Let's turn our attention to writing code and adding other features.
+Copilot is now diligently working on your second request! Copilot coding agent works in a similar fashion to a SWE, so we don't need to actively monitor it, but instead review once it's completed. Let's turn our attention to writing code and adding other features.
 
 ## Summary and next steps
 
@@ -197,11 +192,12 @@ With coding agent working diligently in the background, we can now turn our atte
 | [← Prerequisites][previous-lesson] | [Next lesson: MCP servers →][next-lesson] |
 |:--|--:|
 
-[coding-agent-overview]: https://docs.github.com/en/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot#overview-of-copilot-coding-agent
-[coding-agent-mcp]: https://docs.github.com/en/copilot/how-tos/agents/copilot-coding-agent/extending-copilot-coding-agent-with-mcp
-[assign-issue]: https://docs.github.com/en/copilot/using-github-copilot/coding-agent/using-copilot-to-work-on-an-issue
-[setup-workflow]: https://docs.github.com/en/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#pre-installing-dependencies-in-github-copilots-environment
-[copilot-agents]: https://docs.github.com/en/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot
-[coding-agent-best-practices]: https://docs.github.com/en/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks
+[coding-agent-overview]: https://docs.github.com/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot#overview-of-copilot-coding-agent
+[coding-agent-mcp]: https://docs.github.com/copilot/how-tos/agents/copilot-coding-agent/extending-copilot-coding-agent-with-mcp
+[assign-issue]: https://docs.github.com/copilot/using-github-copilot/coding-agent/using-copilot-to-work-on-an-issue
+[setup-workflow]: https://docs.github.com/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#pre-installing-dependencies-in-github-copilots-environment
+[copilot-agents]: https://docs.github.com/copilot/using-github-copilot/coding-agent/about-assigning-tasks-to-copilot
+[coding-agent-best-practices]: https://docs.github.com/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks
+[github-actions]: https://docs.github.com/actions
 [next-lesson]: ./2-mcp.md
 [previous-lesson]: ./0-prereqs.md
