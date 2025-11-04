@@ -15,7 +15,8 @@
         "prebuild",
         "pylance",
         "schlich",
-        "SDLC"
+        "SDLC",
+        "WCAG"
     ],
     "github.copilot.nextEditSuggestions.enabled": true,
     "editor.tabSize": 4,
