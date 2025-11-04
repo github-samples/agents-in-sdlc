@@ -42,7 +42,7 @@ Now that we've seen the sessions which are active, let's request Copilot include
 
 1. Select the session which refers to adding a high contrast mode. The exact title will vary depending on the name Copilot uses and the current state of work.
 
-    ![Accessibility session in mission control](images/accessibility-session.png)
+    ![Accessibility session in mission control](images/ex6-accessibility-session.png)
 
 2. Watch the session for a few of minutes, until it indicates it's completed the setup and begun its work. You'll know this has happened when you start seeing messages similar to the ones below.
 

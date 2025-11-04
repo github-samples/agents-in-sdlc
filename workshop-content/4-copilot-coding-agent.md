@@ -105,11 +105,11 @@ While every developer and organization understands the importance of documentati
 7. Select **Create** to create the issue.
 8. On the right side, select **Assign to Copilot** to open the assignment dialog.
 
-  ![Assigning Copilot to an issue](images/assign-copilot-coding-agent.png)
+  ![Assigning Copilot to an issue](images/shared-assign-copilot.png)
 
 9. Select **Assign**.
 
-  ![Copilot assignment details](images/assign-copilot-coding-agent-details.png)
+  ![Copilot assignment details](images/ex4-assign-copilot-details.png)
 
 10. Select the **Pull Requests** tab.
 11. Open the newly generated pull request (PR), which will be titled something similar to **[WIP]: Code lacks documentation**. If a new PR doesn't appear on the list, wait for a moment or two and refresh the browser window.
@@ -154,13 +154,13 @@ As has been highlighted, one of the great advantages of GitHub Copilot coding ag
 7. Select **Create** to create the issue.
 8. On the right side, select **Assign to Copilot** to open the assignment dialog.
 
-  ![Assigning Copilot to an issue](images/assign-copilot-coding-agent.png)
+  ![Assigning Copilot to an issue](images/shared-assign-copilot.png)
 
 9. Select **Assign**.
 
 Shortly after, you should see a set of 👀 on the first comment in the issue, indicating Copilot is on the job!
 
-![Copilot uses the eyes emoji to indicate it's working on the issue](images/ex4-issue-eyes.png)
+![Copilot uses the eyes emoji to indicate it's working on the issue](images/ex4-issue-eyes-emoji.png)
 
 Copilot is now diligently working on your second request! Copilot coding agent works in a similar fashion to a SWE, so we don't need to actively monitor it, but instead review once it's completed. Let's turn our attention to writing code and adding other features.
 

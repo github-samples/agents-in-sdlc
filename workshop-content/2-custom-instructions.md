@@ -158,7 +158,7 @@ We want to create a new endpoint to list all publishers, and to follow the same 
 
 12.  Select **flask-endpoint .github/instructions** to add the instruction file to the context.
 
-   ![Screenshot showing the instruction file being added into Copilot Chat](images/copilot-add-instructions-file.png)
+   ![Screenshot showing the instruction file being added into Copilot Chat](images/shared-add-instructions-file.png)
 
 13. Send the same prompt as before to generate the desired endpoint:
 
@@ -190,7 +190,7 @@ We want to create a new endpoint to list all publishers, and to follow the same 
 20. Stage the changes by selecting the **+** icon in the **Source Control** panel.
 21. Generate a commit message using the **Sparkle** button.
 
-    ![Screenshot of the Source Control panel showing the changes made](images/source-control-changes.png)
+    ![Screenshot of the Source Control panel showing the changes made](images/ex2-source-control-changes.png)
 
 22. Commit the changes to your repository by selecting **Commit**.
 

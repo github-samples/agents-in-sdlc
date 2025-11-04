@@ -59,7 +59,7 @@ Mission control is the central location for working with all agents for your env
 7. Select **Create** to create the issue.
 8. On the right side, select **Assign to Copilot** to open the assignment dialog.
 
-  ![Assigning Copilot to an issue](images/assign-copilot-coding-agent.png)
+  ![Assigning Copilot to an issue](images/shared-assign-copilot.png)
 
 9.  Select **Accessibility agent** from the list of custom agents.
 10. Select **Assign**.
