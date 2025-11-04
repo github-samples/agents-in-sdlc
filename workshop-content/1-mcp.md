@@ -71,7 +71,7 @@ Once you have the extension installed, you may need to authenticate with your Gi
 5. After authentication, you should see the Copilot Chat window appear.
 6. Switch to agent mode by selecting the dropdown in the Copilot Chat window and selecting **Agent**.
 
-    ![Example of switching to agent mode](images/ex1-agent-mode-dropdown.png)
+    ![Example of switching to agent mode](images/shared-agent-mode-dropdown.png)
 
 7. Set the model to **Claude Sonnet 4.5**.
 
