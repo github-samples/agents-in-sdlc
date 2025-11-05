@@ -1,6 +1,6 @@
 import unittest
 import json
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any
 from flask import Flask, Response
 from models import Game, Publisher, Category, db
 from routes.games import games_bp
