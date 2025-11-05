@@ -1,4 +1,5 @@
 ---
+description: 'Flask API endpoint instructions'
 applyTo: 'server/routes/*.py'
 ---
 

@@ -1,52 +1,79 @@
 ---
+description: 'Instructions for code generation for UI components'
 applyTo: '**/*.svelte,**/*.astro,**/*.css'
 ---
 
 # UI Development Guidelines
 
-## Svelte Component Structure
+## Svelte Pattern
 
-- Define TypeScript interfaces for all data structures at top of `<script lang="ts">` block
-- Export component props with proper types: `export let games: Game[] = []`
-- Use state variables for `loading`, `error`, and data with appropriate types
-- Implement proper error handling with try-catch in async functions
-- Use `onMount` for data fetching operations
+```typescript
+<script lang="ts">
+  import { onMount } from "svelte";
+  
+  interface Item { id: number; name: string; }
+  export let items: Item[] = [];
+  let loading = true;
+  let error: string | null = null;
+  
+  const fetchData = async () => {
+    loading = true;
+    try {
+      const res = await fetch('/api/endpoint');
+      if (res.ok) items = await res.json();
+      else error = `Failed: ${res.status} ${res.statusText}`;
+    } catch (err) {
+      error = `Error: ${err instanceof Error ? err.message : String(err)}`;
+    } finally { loading = false; }  // ALWAYS
+  };
+  
+  onMount(() => { fetchData(); });
+</script>
 
-## Async/Data Fetching Patterns
+{#if loading}
+  <div class="animate-pulse bg-slate-700 rounded h-6"></div>
+{:else if error}
+  <div class="text-red-400">{error}</div>
+{:else if items.length === 0}
+  <p class="text-slate-300">No items found</p>
+{:else}
+  {#each items as item (item.id)}
+    <div data-testid="item-card">...</div>
+  {/each}
+{/if}
+```
 
-- Create named async functions (e.g., `fetchGames`) for API calls
-- Set loading state before fetch, update in finally block
-- Check `response.ok` before parsing JSON
-- Store error messages with context: `Failed to fetch: ${response.status}`
-- Handle both network errors and HTTP errors
+## Testability (NEVER SKIP)
 
-## Template Rendering
+- Follow [Playwright testing guidelines](./playwright.instructions.md)
+- Ensure attributes are discoverable in Playwright tests
+- Explore existing tests and IDs, and follow existing discovery patterns
 
-- Use Svelte conditionals: `{#if loading}...{:else if error}...{:else}...{/if}`
-- Always provide loading, error, and empty state UIs
-- Use keyed `{#each}` blocks: `{#each items as item (item.id)}`
-- Add `data-testid` attributes for testing: `data-testid="game-card"`
+**MUST add `data-testid` to:**
+- Interactive: buttons, links, inputs
+- Containers: grids, lists, cards
+- Assertions: titles, descriptions, status
 
-## Styling Standards
+```svelte
+✅ <div data-testid="games-grid">
+     <a data-testid="game-card" data-game-id={id}>
+       <h3 data-testid="game-title">{title}</h3>
+     </a>
+   </div>
 
-- Use Tailwind CSS utility classes exclusively
-- Dark mode theme: slate-800/900 backgrounds, slate-100/300 text
-- Rounded corners: `rounded-xl` for cards, `rounded` for buttons
-- Backdrop blur for depth: `backdrop-blur-sm` on card backgrounds
-- Hover effects: border color changes, translations, shadow animations
-- Loading skeletons: `animate-pulse` with slate-700 backgrounds
+❌ <div><a><h3>{title}</h3></a></div>
+```
 
-## Accessibility & UX
+## Styling (Tailwind - Dark)
 
-- Use semantic HTML elements (`<a>`, `<button>`, `<h1>-<h6>`)
-- Provide meaningful text alternatives for states
-- Add transition effects: `transition-all duration-300`
-- Use proper heading hierarchy
-- Support keyboard navigation
+- BG: `bg-slate-800/60 bg-slate-900`
+- Text: `text-slate-100` (primary), `text-slate-300/400` (secondary)
+- Cards: `rounded-xl shadow-lg backdrop-blur-sm`
+- Hover: `hover:translate-y-[-6px] transition-all duration-300`
+- Loading: `animate-pulse bg-slate-700`
 
-## Astro Page Patterns
+## Accessibility
 
-- Import layouts and components at frontmatter top
-- Use `client:only="svelte"` for interactive Svelte components
-- Keep Astro pages focused on layout and static content
-- Import global styles when needed: `import "../styles/global.css"`
+- Semantic: `<button>`, `<a>`, `<h1-h6>`, `<nav>`, `<main>`
+- Heading hierarchy: One `<h1>`, then `<h2>`, `<h3>`
+- Keyboard: All interactive = focusable

@@ -1,4 +1,5 @@
 ---
+description: 'Flask API endpoint and server test generation instructions for Python'
 applyTo: 'server/tests/test_*.py'
 ---
 
