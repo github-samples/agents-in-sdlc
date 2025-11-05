@@ -16,13 +16,11 @@
         starRating: number | null;
     }
 
-    // Accept either a game object or a gameId
-    export let game: Game | undefined = undefined;
-    export let gameId = 0;
+    let { game = undefined, gameId = 0 }: { game?: Game, gameId?: number } = $props();
     
-    let loading = true;
-    let error: string | null = null;
-    let gameData: Game | null = null;
+    let loading = $state(true);
+    let error = $state<string | null>(null);
+    let gameData = $state<Game | null>(null);
     
     onMount(async () => {
         // If game object is provided directly, use it
@@ -52,7 +50,6 @@
         }
     });
 
-    // Function to render stars based on rating
     function renderStarRating(rating: number | null): string {
         if (rating === null) return "Not yet rated";
         
