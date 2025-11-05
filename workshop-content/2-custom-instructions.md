@@ -61,6 +61,11 @@ A full conversation about creating instructions files is beyond the scope of the
 
 There isn't one specific way to create instructions files, just as there isn't one specific way to use AI. You will find through experimentation what works best for your project. The guidance provided here and the [resources](#resources) below should help you get started.
 
+> [!TIP]
+> Every project using GitHub Copilot should have a robust collection of instructions files to provide context and best guide code generation. You can even have Copilot aid in generating instructions files by selecting the gear icon for **Configure Chat** in Copilot chat and selecting **Generate Agent Instructions**.
+> 
+> ![Screenshot of option in GitHub Copilot chat with configure chat highlighted and generate agent instructions highlighted](./images/ex2-generate-instructions.png)
+
 ## Use GitHub Copilot Chat before updating custom instructions
 
 To see the impact of custom instructions, you'll start by sending a prompt with the current version of the files. You'll then make some updates, send the same prompt again, and note the difference.
@@ -87,15 +92,15 @@ To see the impact of custom instructions, you'll start by sending a prompt with 
 > [!IMPORTANT]
 > As highlighted previously, GitHub Copilot and LLM tools are probabilistic, not deterministic. As a result, the exact code generated may vary, and there's even a chance it'll abide by your rules without you spelling it out! But to aid consistency in code you should always document anything you want to ensure Copilot should understand about how you want your code generated.
 
-## Add repository standards to copilot-instructions.md
+## Add new repository standards to copilot-instructions.md
 
 As highlighted previously, `copilot-instructions.md` is designed to provide project-level information to Copilot. Let's ensure repository coding standards are documented to improve code suggestions from Copilot chat.
 
 1. Return to your codespace.
 2. Open `.github/copilot-instructions.md`.
 3. Explore the file, noting the brief description of the project and sections for **Code standards**, **Scripts** and **GitHub Actions Workflows**. These are applicable to any interactions you'd have with Copilot, are robust, and provide clear guidance on what you're doing and how you want to accomplish it.
-4. Locate the **Code formatting requirements** section, which should be around line 23. Note how it contains a note to use type hints. That's why you saw those in the code generated previously.
-5. Add the following lines of markdown right below the note about type hints to instruct Copilot to add comment headers to files and docstrings (which should be near line 23):
+4. Locate the **Code formatting requirements** section, which should be near line 27. Note how it contains a note to use type hints. That's why you saw those in the code generated previously.
+5. Add the following lines of markdown right below the note about type hints to instruct Copilot to add comment headers to files and docstrings (which should be near line 27):
 
    ```markdown
    - Every function should have docstrings or the language equivalent.
@@ -228,6 +233,7 @@ Next we'll use [agent mode to add functionality to the site][next-lesson].
 - [5 tips for writing better custom instructions for Copilot][copilot-instructions-five-tips]
 - [Best practices for creating custom instructions][instructions-best-practices]
 - [Personal custom instructions for GitHub Copilot][personal-instructions]
+- [Awesome Copilot - a collection of instructions files and other resources][awesome-copilot]
 
 ---
 
@@ -243,3 +249,4 @@ Next we'll use [agent mode to add functionality to the site][next-lesson].
 [instructions-best-practices]: https://docs.github.com/enterprise-cloud@latest/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
 [personal-instructions]: https://docs.github.com/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 [copilot-instructions-five-tips]: https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/
+[awesome-copilot]: https://github.com/github/awesome-copilot
