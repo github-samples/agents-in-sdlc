@@ -62,7 +62,9 @@ A full conversation about creating instructions files is beyond the scope of the
 There isn't one specific way to create instructions files, just as there isn't one specific way to use AI. You will find through experimentation what works best for your project. The guidance provided here and the [resources](#resources) below should help you get started.
 
 > [!TIP]
-> Every project using GitHub Copilot should have a robust collection of instructions files to provide context and best guide code generation. You can even have Copilot aid in generating instructions files by selecting the gear icon for **Configure Chat** in Copilot chat and selecting **Generate Agent Instructions**.
+> Every project using GitHub Copilot should have a robust collection of instructions files to provide context and best guide code generation. As you explore the instructions files in the project, you may notice there are ones for numerous types of files and tasks, including [UI updates](../.github/instructions/ui.instructions.md) and [Astro](../.github/instructions/astro.instructions.md). The investment made in instructions files will greatly enhance the quality of code suggestion from Copilot, ensuring it better matches the style and requirements your organization has.
+> 
+> You can even have Copilot aid in generating instructions files by selecting the gear icon for **Configure Chat** in Copilot chat and selecting **Generate Agent Instructions**.
 > 
 > ![Screenshot of option in GitHub Copilot chat with configure chat highlighted and generate agent instructions highlighted](./images/ex2-generate-instructions.png)
 
