@@ -145,9 +145,9 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
 
 From this section, you explored how the custom instructions file has provided Copilot with the context it needs to generate code that follows the established guidelines.
 
-## Instruction files for tasks
+## Instructions for specific tasks or files
 
-Coding is often repetitive, with developers performing similar tasks on a regular basis. Copilot is wonderful for allowing you to offload these types of tasks. But these types of tasks, like adding an endpoint, creating a component, or adding a new service pattern implementation often require a particular template or structure to be followed. Instruction files allow you to provide specific requirements for these types of tasks. They can be added manually when using Copilot Chat, or can have an `applyTo:` tag added to the top of the file to have Copilot automatically use them for specific files.
+Coding is often repetitive, with developers performing similar tasks on a regular basis. Copilot is wonderful for allowing you to offload the mundane, like adding endpoints, generating tests, or building a new component. But all code has a set of requirements, and often require a particular template or structure to be followed. **\*.instructions.md** files allow you to provide tailored guidance for these types of tasks and files. They can be added manually when using Copilot Chat, or can have an `applyTo:` tag added to the top of the file to have Copilot automatically use them for specific files.
 
 ## Explore a task-specific custom instructions file
 
@@ -181,7 +181,7 @@ You want to create a new endpoint to list all publishers, and to follow the same
 
 12.  Select **flask-endpoint .github/instructions** to add the instruction file to the context.
 
-   ![Screenshot showing the instruction file being added into Copilot Chat](images/shared-add-instructions-file.png)
+   ![Screenshot showing the instruction file being added into Copilot Chat](images/ex2-add-instructions-file.png)
 
 13. Send the same prompt as before to generate the desired endpoint:
 
