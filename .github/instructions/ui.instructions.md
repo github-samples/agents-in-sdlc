@@ -47,6 +47,7 @@ applyTo: '**/*.svelte,**/*.astro,**/*.css'
 
 ## Testability (NEVER SKIP)
 
+- All new functionality requires new end to end Playwright tests
 - Follow [Playwright testing guidelines](./playwright.instructions.md)
 - Ensure attributes are discoverable in Playwright tests
 - Explore existing tests and IDs, and follow existing discovery patterns

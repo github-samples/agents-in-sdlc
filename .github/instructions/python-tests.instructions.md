@@ -7,6 +7,7 @@ applyTo: 'server/tests/test_*.py'
 
 ## Test Class Structure
 
+- Blueprints should have their own test files for proper grouping and maintainability
 - Use `unittest.TestCase` as base class
 - Name pattern: `Test<FeatureName>Routes` or `Test<FeatureName>Models`
 - Include type hints for all methods and parameters
