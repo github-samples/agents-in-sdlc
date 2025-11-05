@@ -4,6 +4,10 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 
 ## Agent notes
 
+- Explore the project before beginning code generation
+- Create todo lists for long operations
+  - Before each step in a todo list, double check the instructions
+- Always use instructions files when available, reviewing before generating code
 - Do not generate summary markdown files upon completion of a task
 - Always use absolute paths when running scripts and BASH commands
 

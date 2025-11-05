@@ -5,7 +5,9 @@ applyTo: '**/*.svelte,**/*.astro,**/*.css'
 
 # UI Development Guidelines
 
-## Svelte Pattern
+## Svelte patterns
+
+- Keep components small, focused on reusability and readability
 
 ```typescript
 <script lang="ts">
