@@ -1,82 +1,68 @@
 ---
-description: 'Instructions for code generation for UI components'
-applyTo: '**/*.svelte,**/*.astro,**/*.css'
+description: 'Central UI strategy and component development philosophy'
 ---
 
-# UI Development Guidelines
+# UI Component Strategy
 
-## Svelte patterns
+This file defines the central UI development strategy for Tailspin Toys. Technology-specific guidance is in separate instruction files.
 
-- Keep components small, focused on reusability and readability
+## Component Architecture
 
-```typescript
-<script lang="ts">
-  import { onMount } from "svelte";
-  
-  interface Item { id: number; name: string; }
-  export let items: Item[] = [];
-  let loading = true;
-  let error: string | null = null;
-  
-  const fetchData = async () => {
-    loading = true;
-    try {
-      const res = await fetch('/api/endpoint');
-      if (res.ok) items = await res.json();
-      else error = `Failed: ${res.status} ${res.statusText}`;
-    } catch (err) {
-      error = `Error: ${err instanceof Error ? err.message : String(err)}`;
-    } finally { loading = false; }  // ALWAYS
-  };
-  
-  onMount(() => { fetchData(); });
-</script>
+### Technology Separation
 
-{#if loading}
-  <div class="animate-pulse bg-slate-700 rounded h-6"></div>
-{:else if error}
-  <div class="text-red-400">{error}</div>
-{:else if items.length === 0}
-  <p class="text-slate-300">No items found</p>
-{:else}
-  {#each items as item (item.id)}
-    <div data-testid="item-card">...</div>
-  {/each}
-{/if}
-```
+- **Astro** (`.astro` files): Page routing, layouts, static content
+- **Svelte** (`.svelte` files): Interactive components, client-side state
+- **Tailwind CSS** (`.css` files): Styling via utility classes
 
-## Testability (NEVER SKIP)
+Refer to technology-specific instruction files:
+- [`svelte.instructions.md`](svelte.instructions.md) - Svelte 5 components with runes
+- [`astro.instructions.md`](astro.instructions.md) - Astro pages and layouts  
+- [`tailwindcss.instructions.md`](tailwindcss.instructions.md) - Tailwind CSS styling patterns
 
-- All new functionality requires new end to end Playwright tests
-- Follow [Playwright testing guidelines](./playwright.instructions.md)
-- Ensure attributes are discoverable in Playwright tests
-- Explore existing tests and IDs, and follow existing discovery patterns
+## Core Principles
 
-**MUST add `data-testid` to:**
-- Interactive: buttons, links, inputs
-- Containers: grids, lists, cards
-- Assertions: titles, descriptions, status
+### Testability
 
-```svelte
-✅ <div data-testid="games-grid">
-     <a data-testid="game-card" data-game-id={id}>
-       <h3 data-testid="game-title">{title}</h3>
-     </a>
-   </div>
+- Every interactive element MUST include a `data-testid` attribute
+- Use descriptive test IDs that identify the element's purpose and context
+- Examples: `data-testid="game-card-{game.id}"`, `data-testid="submit-button"`, `data-testid="nav-home"`
 
-❌ <div><a><h3>{title}</h3></a></div>
-```
+### Accessibility
 
-## Styling (Tailwind - Dark)
+- Use semantic HTML elements (`<nav>`, `<main>`, `<article>`, `<button>`)
+- Provide ARIA labels and roles where semantic HTML isn't sufficient
+- Ensure keyboard navigation works for all interactive elements
+- Include visible focus states: `focus:ring-2 focus:ring-blue-500 focus:outline-none`
+- Maintain sufficient color contrast (especially in dark theme)
 
-- BG: `bg-slate-800/60 bg-slate-900`
-- Text: `text-slate-100` (primary), `text-slate-300/400` (secondary)
-- Cards: `rounded-xl shadow-lg backdrop-blur-sm`
-- Hover: `hover:translate-y-[-6px] transition-all duration-300`
-- Loading: `animate-pulse bg-slate-700`
+### Design Consistency
 
-## Accessibility
+- Dark theme throughout the application
+- Modern, clean UI with rounded corners and smooth transitions
+- Consistent spacing and visual hierarchy
+- Responsive design that works on mobile, tablet, and desktop
 
-- Semantic: `<button>`, `<a>`, `<h1-h6>`, `<nav>`, `<main>`
-- Heading hierarchy: One `<h1>`, then `<h2>`, `<h3>`
-- Keyboard: All interactive = focusable
+### Component Reusability
+
+- Create reusable components for common UI patterns
+- Keep components focused on a single responsibility
+- Use props for configuration, not duplication
+- Document component APIs with TypeScript types
+
+## Development Workflow
+
+1. **Choose the right technology**: 
+   - Static content → Astro
+   - Interactivity → Svelte
+   - Styling → Tailwind
+
+2. **Follow technology-specific patterns**: 
+   - Refer to the appropriate instruction file
+
+3. **Ensure testability**: 
+   - Add `data-testid` to all interactive elements
+
+4. **Verify accessibility**: 
+   - Test keyboard navigation
+   - Check focus states
+   - Validate semantic structure

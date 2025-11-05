@@ -8,7 +8,7 @@ applyTo: '**/*.spec.ts'
 ## Code Quality Standards
 
 - **Locators**: Prioritize user-facing, role-based locators (`getByRole`, `getByLabel`, `getByText`, etc.) for resilience and accessibility. Use `test.step()` to group interactions and improve test readability and reporting.
-- **Timeouts**: Rely solely on Playwright's built-in auto-waiting mechanisms. NEVER use hard-coded waits or increased default timeouts.
+- **Timeouts**: Rely solely on Playwright's built-in auto-waiting mechanisms. NEVER use hard-coded waits such as `waitForTimeout`, increased default timeouts, or `waitForLoadState`.
 - **Assertions**: Use auto-retrying web-first assertions. These assertions start with the `await` keyword (e.g., `await expect(locator).toHaveText()`). NEVER use `expect(locator).toBeVisible()` unless specifically testing for visibility changes.
 - **Clarity**: Use descriptive test and step titles that clearly state the intent. Add comments only to explain complex logic or non-obvious interactions.
 
