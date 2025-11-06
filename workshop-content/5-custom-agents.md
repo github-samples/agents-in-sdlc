@@ -1,10 +1,9 @@
 # Exercise 5 - Custom agents
 
-
 | [← Previous lesson: GitHub Copilot coding agent][previous-lesson] | [Next lesson: Managing agents →][next-lesson] |
 |:--|--:|
 
-[Custom agents][custom-agents] in GitHub Copilot allow you to create specialized AI assistants tailored to specific tasks or domains within your development workflow. By defining agents through markdown files in the `.github/agents` folder of your repository, you can provide Copilot with focused instructions, best practices, coding patterns, and domain-specific knowledge that guide it to perform particular types of work more effectively. This allows teams to codify their expertise and standards into reusable agents—such as an accessibility agent that ensures [WCAG][wcag] compliance, a security agent that follows secure coding practices, or a testing agent that maintains consistent test patterns—enabling developers to leverage these specialized capabilities on-demand for faster, more consistent implementations.
+[Custom agents][custom-agents] in GitHub Copilot allow you to create specialized AI assistants tailored to specific tasks or domains within your development workflow. By defining agents through markdown files in the `.github/agents` folder of your repository, you can provide Copilot with focused instructions, best practices, coding patterns, and domain-specific knowledge that guide it to perform particular types of work more effectively. This allows teams to codify their expertise and standards into reusable agents. You might create an accessibility agent that ensures [WCAG][wcag] compliance, a security agent that follows secure coding practices, or a testing agent that maintains consistent test patterns—enabling developers to leverage these specialized capabilities on-demand for faster, more consistent implementations.
 
 You'll explore the following with custom agents:
 
@@ -19,7 +18,7 @@ Because accessibility is critical, you want to ensure this is implemented as qui
 
 ## Custom agents
 
-Custom agents are defined by markdown files in the **.github/agents** folder of your project. The markdown files will contain guidance for Copilot on how best to perform at task. You might consider creating custom agents for many types of tasks.
+Custom agents are defined by markdown files in the **.github/agents** folder of your project. The markdown files will contain guidance for Copilot on how best to perform at task.
 
 ## Reviewing the accessibility custom agent
 
@@ -58,12 +57,12 @@ Mission control is the central location for working with all agents for your env
 
 7. Select **Create** to create the issue.
 8. On the right side, select **Assign to Copilot** to open the assignment dialog.
-
-  ![Assigning Copilot to an issue](images/shared-assign-copilot.png)
-
 9.  Select **Accessibility agent** from the list of custom agents.
+
+  ![Screenshot of coding agent assignment, with custom agent and accessibility highlighted](./images/ex5-select-custom-agent.png)
+
 10. Select **Assign**.
-11. Copilot gets to work on the task!
+11. Copilot gets to work on the task in the background!
 
 ## Summary and next steps
 
