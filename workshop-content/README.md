@@ -9,7 +9,7 @@ The recent additions to the capabilities of GitHub Copilot provide powerful tool
 >
 > If something appears broken or isn't running correctly, please ask a mentor!
 
-The labs will walk you through the most common workloads with the agent capabilities of GitHub Copilot.
+These labs will walk you through the most common workloads with the agent capabilities of GitHub Copilot.
 
 0. [Setup the environment](./0-prereqs.md).
 1. [Configure and interact with external services](./1-mcp.md) through Model Context Protocol (MCP).
@@ -22,7 +22,7 @@ The labs will walk you through the most common workloads with the agent capabili
 
 ## Scenario
 
-The lab envisions you as a new developer for Tailspin Toys, a fictional company who provides crowdfunding for boardgames with a DevOps theme - a huge market! You are tasked with creating issues to document the desired updates to the application and DevOps flow, then implementing the ability to filter games by both category and publisher. You'll work iteratively, exploring both the site and Copilot's capabilities, to complete the tasks.
+You are a new developer for Tailspin Toys, a fictional company who provides crowdfunding for boardgames with a DevOps theme - a huge market! You are tasked with creating issues to document the desired updates to the application and DevOps flow, then implementing the ability to filter games by both category and publisher. You'll work iteratively, exploring both the site and Copilot's capabilities, to complete the tasks.
 
 ## Get started
 
