@@ -17,8 +17,10 @@ These labs will walk you through the most common workloads with the agent capabi
 3. [Complete a site-wide update](./3-copilot-agent-mode-vscode.md) with the help of Copilot agent mode.
 4. [Assign issues to GitHub Copilot coding agent](./4-copilot-coding-agent.md) to allow Copilot to work on tasks asynchronously.
 5. [Create and use custom agents](./5-custom-agents.md) to provide specialized guidance for specific tasks.
-6. [Monitor and guide agent sessions in mission control](./6-mission-control.md) to track progress and redirect work.
-7. [Iterate on Copilot coding agent's work](./7-iterating-coding-agent.md) to refine and improve the generated code.
+6. [Manage agents](./6-managing-agents.md) to control who has access to your agents and how they're used.
+7. [Iterate on Copilot's work](./7-iterating-copilot-work.md) to refine and improve the generated code.
+
+## Conclusion
 
 ## Scenario
 

@@ -1,4 +1,4 @@
-# Exercise 7: Iterating on GitHub Copilot coding agent's work
+# Exercise 7: Iterating on GitHub Copilot's work
 
 | [← Previous lesson: Mission control][previous-lesson] |
 |:--|
