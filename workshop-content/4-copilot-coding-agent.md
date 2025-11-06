@@ -118,16 +118,16 @@ While everyone understands the importance of documentation, most projects have e
 > [!NOTE]
 > It make take several minutes for the todo list from Copilot to appear in the PR. Copilot is creating its environment (running the workflow highlighted previously), analyzing the project, and determining the best approach to tackling the problem.
 
-14.  Review the list and the tasks it's going to complete.
-15.   Scroll down the pull request timeline, and you should see an update that Copilot has started working on the issue.
-16.   Select the **View session** button.
+13. Review the list and the tasks it's going to complete.
+14. Scroll down the pull request timeline, and you should see an update that Copilot has started working on the issue.
+15. Select the **View session** button.
 
   ![Copilot session view](images/ex4-view-session.png)
 
 > [!IMPORTANT]
 > You may need to refresh the window to see the updated indicator.
 
-17. Notice that you can scroll through the live session, and how Copilot is solving the problem. That includes exploring the code and understanding the state, how Copilot pauses to think and decide on the appropriate plan and also creating code.
+16. Notice that you can scroll through the live session, and how Copilot is solving the problem. That includes exploring the code and understanding the state, how Copilot pauses to think and decide on the appropriate plan and also creating code.
 
 This will likely take several minutes. One of the primary goals of Copilot coding agent is to allow it to perform tasks asynchronously, freeing us to focus on other tasks. We're going to take advantage of that very feature by both assigning another task to Copilot coding agent, then turning our attention to writing some code to add features to our application.
 
