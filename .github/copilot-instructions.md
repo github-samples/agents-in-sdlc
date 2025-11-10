@@ -4,6 +4,10 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 
 ## Agent notes
 
+- Explore the project before beginning code generation
+- Create todo lists for long operations
+  - Before each step in a todo list, reread the instructions to ensure you always have the right directions
+- Always use instructions files when available, reviewing before generating code
 - Do not generate summary markdown files upon completion of a task
 - Always use absolute paths when running scripts and BASH commands
 
@@ -30,16 +34,16 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 
 ### Svelte and Astro Patterns
 
-- Use Svelte for interactive components
-- Follow Svelte's reactive programming model
-- Create reusable components when functionality is used in multiple places
-- Use Astro for page routing and static content
+- **Svelte 5 Components**: Use runes-based reactivity (`$state`, `$derived`, `$effect`, `$props`) - see `svelte.instructions.md`
+- **Astro Pages**: Use Astro for routing, layouts, and static content - see `astro.instructions.md`
+- Create reusable Svelte components when functionality is used in multiple places
+- Use `client:only="svelte"` directive when embedding Svelte in Astro pages
 
 ### Styling
 
-- Use Tailwind CSS classes for styling
-- Maintain dark mode theme throughout the application
-- Use rounded corners for UI elements
+- Use Tailwind CSS utility classes exclusively - see `tailwindcss.instructions.md`
+- Dark theme colors: slate palette (`bg-slate-800`, `text-slate-100`, etc.)
+- Rounded corners and modern UI patterns
 - Follow modern UI/UX principles with clean, accessible interfaces
 
 ### GitHub Actions workflows
@@ -71,5 +75,4 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
   - `src/styles/`: CSS and Tailwind configuration
 - `scripts/`: Development and deployment scripts
 - `data/`: Database files
-- `docs/`: Project documentation
 - `README.md`: Project documentation

@@ -6,6 +6,7 @@
         "Codespaces",
         "containerapp",
         "creds",
+        "deprioritized",
         "devcontainer",
         "devcontainers",
         "docstrings",
@@ -14,7 +15,8 @@
         "prebuild",
         "pylance",
         "schlich",
-        "SDLC"
+        "SDLC",
+        "WCAG"
     ],
     "github.copilot.nextEditSuggestions.enabled": true,
     "editor.tabSize": 4,

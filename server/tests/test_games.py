@@ -1,6 +1,6 @@
 import unittest
 import json
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any
 from flask import Flask, Response
 from models import Game, Publisher, Category, db
 from routes.games import games_bp
@@ -167,6 +167,31 @@ class TestGamesRoutes(unittest.TestCase):
         # Assert
         self.assertEqual(response.status_code, 404)
         self.assertEqual(data['error'], "Game not found")
+
+    def test_get_games_empty_database(self) -> None:
+        """Test retrieval of games when database is empty"""
+        # Clear all games from the database
+        with self.app.app_context():
+            db.session.query(Game).delete()
+            db.session.commit()
+        
+        # Act
+        response = self.client.get(self.GAMES_API_PATH)
+        data = self._get_response_data(response)
+        
+        # Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(data, list)
+        self.assertEqual(len(data), 0)
+
+    def test_get_game_by_invalid_id_type(self) -> None:
+        """Test retrieval of a game with invalid ID type"""
+        # Act
+        response = self.client.get(f'{self.GAMES_API_PATH}/invalid-id')
+        
+        # Assert
+        # Flask should return 404 for routes that don't match the <int:id> pattern
+        self.assertEqual(response.status_code, 404)
 
 if __name__ == '__main__':
     unittest.main()
