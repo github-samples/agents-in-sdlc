@@ -8,6 +8,7 @@ lastUpdated: 2026-08-03
 In this optional lesson you'll take the Tailspin catalog and build an AI agent on top of it, discovering and deploying a model, scaffolding an agent locally, deploying it as a Foundry hosted agent and wiring it into the site.
 
 Before you start this exercise, you need a few tools.
+
 ## Prerequisites & setup
 
 1. An Azure Subscription
@@ -133,19 +134,19 @@ Rather than guessing from model reputation, hand Copilot the actual acceptance c
     - Then use the following prompt:
 
         ```
-        /microsoft-foundry recommend a model for the agent described in this issue. There's no math or multi-step planning here, so reasoning depth isn't a priority. Prioritize speed instead. Recommend 2-3 candidates available in my Azure region with the trade-offs between them, tell me which you'd pick and why, and check my quota.
+        /microsoft-foundry recommend a model for the agent described in this issue. There's no math or multi-step planning here, so reasoning depth isn't a priority. Prioritize speed instead. Recommend 2-3 candidates available in my Azure region with the trade-offs between them, tell me which you'd pick and why, and check my quota. Avoid deprecated & older models according to the model retirement schedule
         ```
 
-![Screenshot showing the model recommendations from Copilot.](../_images/vscode-model-recommendation-prompt.png)
+      ![Screenshot showing the model recommendations from Copilot.](../_images/vscode-model-recommendation-prompt.png)
 
-Read through the recommendations and facts presented and make a judgement call on which model to use. We'll continue with `gpt-4.1-mini` in this workshop. 
+Read through the recommendations and facts presented and make a judgement call on which model to use. We'll continue with `gpt-5-mini` in this workshop.
 
 ### Deploy model
 
 Next, ask Copilot to deploy the model with:
 
 ```
-/microsoft-foundry deploy gpt-4.1-mini and use the model name as the deployment name
+/microsoft-foundry deploy gpt-5-mini and use the model name as the deployment name
 ```
 
 If prompted, confirm project and deployment.
@@ -156,7 +157,7 @@ If prompted, confirm project and deployment.
 Once the model is deployed:
 
 - Click on the foundry toolkit icon in the activity bar
-- Expand the My Resources section and click Models. 
+- Expand the My Resources section and click Models.
 
     This will open the models page and your deployed model should show up under Foundry
 
@@ -192,8 +193,6 @@ CATALOG
 ```
 
 </details>
-
-Expand **Inference parameters** and set **temperature** to **0.2** for highly deterministic responses.
 
 Your test cases may include:
 
@@ -238,7 +237,7 @@ Your model is ready. Next - create the agent.
 1. Select the Foundry Toolkit icon in the Activity Bar.
 1. Expand Developer Tools → + Build, then select + Create Agent.
 
-   The Create Agent page opens. Select the dropdown next to **Generate with Copilot** and choose **Simple Agent**.
+   The Create Agent page opens. Select **Code an agent with Copilot**.
 
    ![Screenshot showing the create agent page.](../_images/vscode-create-agent.png)
 
@@ -291,16 +290,42 @@ Observe the chat and terminal in case any actions are required from you, i.e, pa
 
     ![Screenshot showing the deployed hosted agent.](../_images/vscode-agent-deployed.png)
 
-- Click on the agent name to open it in the Hosted agent playground, and confirm the deployment status is Running 
+- Click on the agent name to open it in the Hosted agent playground, and confirm the deployment status is Running
 - Switch to the Playground tab, and test the hosted-agent
 
     ![Screenshot showing a response from the deployed hosted agent.](../_images/vscode-agent-response.png)
 
-## Bring it all together
+## Wire the agent into the static site (proxy)
 
-TODO: brainstorming static website constraint
+Tailspin Toys is a static website, full pre-rendered so it can't securely call the hosted agent without leaking the agent's credentials. To avoid that, you'll provision a small serverless proxy: an Azure Functions app in `/api` that sits between the static site and the hosted agent, holding the connection details and forwarding requests.
 
-![Screenshot showing an example integration.](../_images/vscode-ask-the-backer-concierge.png)
+Good thing, you won't hand-write the infrastructure. Copilot, through the **Azure skills** will plan, provision and validate resources conversationally - you describe the outcome, review what it proposes and approve.
+
+1. In Copilot Chat (Agent mode), attach the Backer Concierge issue as context, **+** > **GitHub issues** and ask:
+
+   ```
+   Our Astro site is output: 'static', so it can't hold the Foundry agent credentials. Scaffold an Azure Functions v4 (Node/TypeScript) project in api/ that exposes a single POST /api/concierge endpoint proxying to my deployed Backer Concierge agent. Keep the Foundry REST logic in a separate, unit-testable module and read configuration from app settings only.
+   ```
+
+   Review what Copilot produces before accepting it. You're looking for three things: the HTTP trigger is a thin adapter, the Foundry client is isolated (so it can be tested without a live agent), and configuration comes from `FOUNDRY_PROJECT_ENDPOINT` / `FOUNDRY_AGENT_ID` / optional `FOUNDRY_API_KEY`
+
+1. Prove the backend works **before** building any UI:
+
+   ```
+   Start the Functions host and send a test request to /api/concierge asking "which games are under $30?" — show me the raw response.
+   ```
+
+   Check the terminal for the response. It should be a valid JSON object with a `response` property containing the agent's answer.
+
+   **Keep** the changes, and **/clear** the chat so you can start fresh for the next step.
+
+1. Build the chat widget.
+
+   ```
+   Add an accessible Backer Concierge chat widget as an Astro component and render it site-wide from Layout.astro. It should POST to /api/concierge and thread the conversation using the returned threadId, follow the dark theme in style.instructions.md, support Escape to close, and include data-testid attributes.
+   ```
+
+   ![Video showing the Backer Concierge chat widget in action](../_images/tailspin-toys-backer-concierge-agent.mp4)
 
 ## Clean up your resources
 
