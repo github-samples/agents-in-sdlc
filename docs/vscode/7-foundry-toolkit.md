@@ -325,7 +325,7 @@ Good thing, you won't hand-write the infrastructure. Copilot, through the **Azur
    Add an accessible Backer Concierge chat widget as an Astro component and render it site-wide from Layout.astro. It should POST to /api/concierge and thread the conversation using the returned threadId, follow the dark theme in style.instructions.md, support Escape to close, and include data-testid attributes.
    ```
 
-   ![Video showing the Backer Concierge chat widget in action](../_images/tailspin-toys-backer-concierge-agent.mp4)
+   ![Screenshot showing the Backer Concierge chat widget in action](../_images/tailspin-toys-backer-concierge-agent.png)
 
 ## Clean up your resources
 
