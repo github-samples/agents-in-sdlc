@@ -376,9 +376,7 @@ The `microsoft-foundry` skill owns the hosted-agent workflow, while the broader 
 1. Ask Copilot to create the site integration:
 
    ```text
-   Add an accessible Backer Concierge chat widget as an Astro component and render it site-wide from src/layouts/Layout.astro. It should POST only to the local Azure Functions proxy URL, preserve the server-generated conversation handle returned by the proxy, follow the existing Tailspin Toys visual style, support keyboard operation and Escape to close, announce loading, new messages, and error states without duplicate announcements, and include data-testid attributes. Give the dialog an accessible name, move focus into it when opened, maintain a logical tab order, restore focus to the opener when closed, and preserve the transcript's reading order.
-
-   The only client-visible configuration may be the localhost proxy URL. Never include a Foundry endpoint, project identifier, agent credential, raw Foundry conversation identifier, or access token in browser code. Add end-to-end and accessibility tests, then run the unit, type, lint, end-to-end, and accessibility checks. Don't add deployment configuration for the Function.
+   Add an accessible Backer Concierge chat widget as an Astro component and render it site-wide from Layout.astro. It should POST to /api/concierge and thread the conversation using the returned threadId, follow the dark theme in style.instructions.md, support Escape to close, and include data-testid attributes.
    ```
 
 1. Keep the local Function running and start the Astro site in another terminal using the command provided by Copilot.
