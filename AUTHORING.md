@@ -113,7 +113,7 @@ The site runs at <http://localhost:4321/copilot-workshops/>.
 **Verify** before committing:
 
 1. **Build** — `cd website && rm -rf dist && npm run build`. Must succeed.
-2. **Page-count invariant** — Starlight emits 36 workshop routes for English and each of the five configured locales, then adds the legacy redirect. This equals 217 built `index.html` pages when excluding the 404 page; the build reports 218 HTML files including the 404 page.
+2. **Page-count invariant** — Starlight emits 37 workshop routes for English and each of the five configured locales, then adds the legacy redirect. This equals 223 built `index.html` pages when excluding the 404 page; the build reports 224 HTML files including the 404 page.
 3. **Link check** — lychee (offline) against the built `website/dist/`. Catches broken internal links/images.
 
 **What CI enforces vs. what you run locally:** CI (`pages.yml`) runs the **build** and the **lychee** link check on every PR. It does not run browser validation or the content-alignment agentic workflow as part of the Pages build job. After merge to `main`, `pages.yml` deploys the site to GitHub Pages.

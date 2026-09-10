@@ -1,5 +1,5 @@
 ---
-title: "Exercise 8 - Review and Next Steps"
+title: "Exercise 9 - Review and Next Steps"
 authors:
   - geektrainer
 lastUpdated: 2026-06-30
@@ -12,6 +12,8 @@ Over the last several exercises, you explored some of the most common use cases 
 - implementing skills to add tools to the Copilot CLI toolbox.
 - calling custom agents for advanced and more complex tasks.
 - using slash commands to manage your session, and optionally bridging back to cloud agent via `/delegate`.
+
+If you haven't yet, consider the [optional Microsoft Foundry lesson][foundry-lesson] before you finish, which builds a catalog-grounded hosted agent on top of the Tailspin Toys site.
 
 Let's talk about some slash commands, best practices, and next steps.
 
@@ -61,6 +63,7 @@ If you'd like to explore more of the GitHub Copilot ecosystem, check out the [VS
 - [MCP Specification][mcp-spec]
 
 [previous-lesson]: ../7-slash-commands/
+[foundry-lesson]: ../8-foundry-agent/
 [about-copilot-cli]: https://docs.github.com/copilot/concepts/agents/about-copilot-cli
 [using-copilot-cli]: https://docs.github.com/copilot/how-tos/use-copilot-agents/use-copilot-cli
 [awesome-copilot]: https://github.com/github/awesome-copilot

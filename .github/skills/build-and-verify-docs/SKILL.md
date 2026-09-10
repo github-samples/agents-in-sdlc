@@ -43,7 +43,7 @@ cd website && rm -rf dist && npm run build
 
 ### 2. Page-count invariant
 
-The workshop has 36 distinct route slugs. Starlight emits each route for the English root locale and the five configured localized routes, using English fallback content when a translation is unavailable. The built site therefore contains $36 \times 6 = 216$ workshop routes plus the one legacy redirect (`/shared/0-prereqs/`, authored as a full-HTML redirect page at `website/src/pages/shared/0-prereqs.astro`). The expected count is 217 `index.html` files when excluding the 404 page. Astro reports 218 HTML files because it includes the 404 page.
+The workshop has 37 distinct route slugs. Starlight emits each route for the English root locale and the five configured localized routes, using English fallback content when a translation is unavailable. The built site therefore contains $37 \times 6 = 222$ workshop routes plus the one legacy redirect (`/shared/0-prereqs/`, authored as a full-HTML redirect page at `website/src/pages/shared/0-prereqs.astro`). The expected count is 223 `index.html` files when excluding the 404 page. Astro reports 224 HTML files because it includes the 404 page.
 
 ```bash
 # distinct route slugs in the English root locale (docs/README.md + docs/<harness>/*.md)
@@ -61,7 +61,7 @@ find website/dist -name index.html | grep -v 404 | wc -l
 
 ### 2b. Translations actually render (not silent English fallback)
 
-The build and the page-count above are **blind to which content actually renders** — a mis-nested or wrongly-identified locale tree still emits 217 pages served from English fallback. Assert that a known translated page carries translated text and the right `lang` attribute:
+The build and the page-count above are **blind to which content actually renders** — a mis-nested or wrongly-identified locale tree still emits 223 pages served from English fallback. Assert that a known translated page carries translated text and the right `lang` attribute:
 
 ```bash
 grep -o '<title>[^<]*</title>' website/dist/es-es/app/2-add-star-rating/index.html   # Spanish title

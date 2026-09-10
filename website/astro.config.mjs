@@ -77,7 +77,8 @@ export default defineConfig({
             { label: '5. Agent skills', link: '/cli/5-agent-skills/' },
             { label: '6. Custom agents', link: '/cli/6-custom-agents/' },
             { label: '7. Slash commands', link: '/cli/7-slash-commands/' },
-            { label: '8. Review', link: '/cli/8-review/' },
+            { label: 'Optional: Microsoft Foundry', link: '/cli/8-foundry-agent/' },
+            { label: '9. Review', link: '/cli/9-review/' },
           ],
         },
         {
