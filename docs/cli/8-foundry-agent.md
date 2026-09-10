@@ -147,8 +147,8 @@ The agent needs a Foundry project and a deployed model. Use the Microsoft Foundr
 
 1. After the project is ready, ask Copilot to recommend a model:
 
-    > [!NOTE]
-    > Replace **#14** with the appropriate issue number for the *Add a Backer Concierge assistant for catalog questions* issue.
+   > [!NOTE]
+   > Replace **#14** with the appropriate issue number for the *Add a Backer Concierge assistant for catalog questions* issue.
 
    ```text
    Use the Microsoft Foundry Skill to recommend two or three current chat models available in the tailspin-toys project for the Backer Concierge acceptance criteria in #14. Prioritize low latency, instruction following, grounding fidelity, available quota, and models that aren't approaching retirement. There is no complex math or multi-step planning. Explain the tradeoffs and wait for me to choose a model from the recommended options.
@@ -324,7 +324,7 @@ The local agent service occupies its terminal while it runs. Keep Copilot CLI op
    Continue with the Microsoft Foundry Skill workflow. Review the hosted agent for deployment readiness, then deploy it to Foundry Agent Service, show the deployment status and playground link, and invoke it remotely with: "I love puzzle games about tracking down bugs. What should I back?"
    ```
 
-   >[!NOTE]
+   > [!NOTE]
    > If prompted to select an evaluation suite source, choose **No, set it up later**
 
    ![Hosted Agent Deployment status and playground link](../_images/cli-8-hosted-agent-deployment.png)
