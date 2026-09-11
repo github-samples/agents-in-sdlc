@@ -23,7 +23,7 @@ Across these lessons you'll install the app and set up your project, then get or
 | [6. Merging with Agent Merge][ex6] | Merge | Let Agent Merge fix and land your filtering pull request |
 | [7. Planning with canvases][ex7] | Collaboration | Create a shared canvas to plan and track your work |
 | [Optional. Backer Concierge with Microsoft Foundry Canvas][foundry-canvas] | AI agents | Build, test, deploy, and integrate a catalog-grounded hosted agent |
-| [8. Review and next steps][ex8] | Summary | Automate recurring tasks and explore what's next |
+| [9. Review and next steps][ex9] | Summary | Automate recurring tasks and explore what's next |
 
 ## Prerequisites
 
@@ -55,6 +55,6 @@ Before attending this workshop, please ensure you have:
 [ex6]: 6-agent-merge/
 [ex7]: 7-canvases/
 [foundry-canvas]: 8-foundry-canvas/
-[ex8]: 8-review/
+[ex9]: 9-review/
 [install-git]: https://github.com/git-guides/install-git
 [callout-student-plan-education]: https://github.com/education/students

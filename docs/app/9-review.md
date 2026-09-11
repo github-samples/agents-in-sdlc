@@ -1,5 +1,5 @@
 ---
-title: "Lesson 8 - Review and next steps"
+title: "Lesson 9 - Review and next steps"
 description: "Recap the GitHub Copilot app harness, automate recurring work, and explore where to go next."
 authors:
   - geektrainer

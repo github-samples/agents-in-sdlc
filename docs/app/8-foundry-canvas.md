@@ -376,7 +376,7 @@ You took a feature brief from an idea to a deployed, product-integrated AI agent
 - created a locally running Azure Functions proxy to call the Foundry Agent Service.
 - added and verified an accessible chat widget in Tailspin Toys.
 
-Continue to [Lesson 8 - Review and next steps][next-lesson].
+Continue to [Lesson 9 - Review and next steps][next-lesson].
 
 ## Resources
 
@@ -390,7 +390,7 @@ Continue to [Lesson 8 - Review and next steps][next-lesson].
 | :-- | --: |
 
 [previous-lesson]: ../7-canvases/
-[next-lesson]: ../8-review/
+[next-lesson]: ../9-review/
 [azure-free]: https://azure.microsoft.com/pricing/purchase-options/azure-account
 [azure-students]: https://azure.microsoft.com/free/students
 [install-azure-cli]: https://learn.microsoft.com/cli/azure/install-azure-cli
