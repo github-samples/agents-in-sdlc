@@ -1,9 +1,9 @@
 ---
-title: "Optional - Build a Backer Concierge with Microsoft Foundry Canvas"
+title: "Optional - Build a Backer Concierge with the Foundry Canvas"
 description: "Use Microsoft Foundry Canvas in the GitHub Copilot app to create, test, deploy, and integrate a catalog-grounded hosted agent."
 authors:
   - juliamuiruri4
-lastUpdated: 2026-09-08
+lastUpdated: 2026-09-10
 ---
 
 In this optional lesson, you'll take the Tailspin catalog and build an AI agent on top of it. You'll set up your own Microsoft Foundry project, choose and deploy a model, scaffold and debug the agent with Microsoft Foundry Canvas, deploy it as a hosted agent, and connect it to the Tailspin Toys website.
@@ -38,7 +38,7 @@ In this lesson, you will:
       azd version
       ```
 
-1. Install Microsoft Foundry plugin
+1. Install Microsoft Foundry plugin that bundles the canvas and foundry skills
 
    - Open the GitHub Copilot app.
    - Open **Customize**, then select **Plugins**.
@@ -58,7 +58,7 @@ In this lesson, you will:
 1. Confirm the installation of both plugins:
 
    - Create a new session in your Tailspin Toys repository
-   - Type `/microsoft-foundry` to confirm the skill is installed and available.
+   - Type `/microsoft-foundry`, then `/azure` to confirm the skills are installed and available. Don't send any prompts yet.
 
       Restart the app if the plugin does not appear immediately.
 
@@ -66,13 +66,16 @@ In this lesson, you will:
 
 In a previous lesson, you added filtering by category and publisher. Filtering helps backers who already know what they want, but other backers ask questions such as *Which games would suit someone who loves Git puns?* Those questions don't have dropdown answers.
 
-In this lesson, you build a **Backer Concierge** that answers catalog questions while staying grounded in Tailspin Toys data. The agent should recommend only games in the Tailspin catalog and never invent games, publishers, ratings, funding totals, backer counts etc.
+In this lesson, you build a **Backer Concierge** that answers catalog questions while staying grounded in Tailspin Toys data. The agent should recommend only games in the Tailspin catalog and never invent games, publishers, ratings, funding totals, backer counts, prices, player counts, play times, or release dates.
+
+1. On the **My work** tab, find and open the issue titled **Add a Backer Concierge assistant for catalog questions**.
+2. Select **New session** to start a session from the issue.
 
 ## Generate the catalog export
 
-The agent needs the catalog as a file it can read. The sample repository includes a tested export script for this purpose.
+The agent needs the catalog as a file it can read. The sample repository includes an export script for this purpose.
 
-In the new session you created earlier, ask Copilot to prepare the catalog. Ensure you are running in a New worktree:
+In the new session you created earlier, ask Copilot to prepare the catalog. Ensure you're running in a new worktree *(replace the default `/fix-issue` prompt in the prompt box)*:
 
    ```plaintext
    Install the project dependencies, seed the database, then run the existing db:export script. Show me the command output and summarize the shape and grounding limits of db/catalog.json.
@@ -86,13 +89,12 @@ npm run db:setup
 npm run db:export
 ```
 
+![Generate catalog export](/docs/_images/app-8-generate-catalog-export.png)
 Open `db/catalog.json`. It should contain 21 games with a title, description, category, publisher, and star rating. Its `note` field states that the catalog doesn't contain funding totals, backer counts, pledge tiers, or release dates. Those omissions define the boundary your agent must respect.
-
-![Catalog export](/docs/_images/app-8-view-catalog.png)
 
 ## Set up a Foundry project and model
 
-The Canvas connects to resources that already exist in a Foundry project, so create the project and model deployment before you scaffold the agent.
+Create the project and model deployment in chat before opening Canvas, so Canvas only ever connects to resources that already exist.
 
 1. Sign in to the Azure CLI and Azure Developer CLI. Click on **+** then select **terminal** and run:
 
@@ -114,44 +116,42 @@ The Canvas connects to resources that already exist in a Foundry project, so cre
 1. In the same session, enter the following prompt:
 
    ```plaintext
-   Use the Microsoft Foundry skill to help me create a resource group named rg-tailspin-toys and a Foundry project named tailspin-toys.
+   Use the Microsoft Foundry skill to create a resource group named rg-tailspin-toys and a Foundry project named tailspin-toys.
    ```
 
    ![Create Foundry project](/docs/_images/app-8-foundry-project-created.png)
 
-1. Open the **Microsoft Foundry Canvas**. Click on **+** > **Canvas** and select **Microsoft Foundry (Preview)**
-
-1. Sign in to Azure by clicking the three dots in the top-right corner of the Canvas interface and selecting **Sign in**.
-1. After the project is ready, ask Copilot to recommend a model:
+1. Ask Copilot to recommend a model. The issue is already in this session's context because you started from it:
 
    ```plaintext
-   Use the Microsoft Foundry skill to recommend two or three current chat models available in this project for the Backer Concierge acceptance criteria. Prioritize low latency, instruction following, grounding fidelity, available quota, and models that aren't approaching retirement. There is no complex math or multi-step planning. Explain the tradeoffs and wait for me to choose a model.
+   Use the Microsoft Foundry skill to recommend two or three current chat models in the tailspin-toys project that meet this issue's acceptance criteria. Explain the tradeoffs and wait for me to choose.
    ```
 
-5. Choose one of the available models. The Microsoft Foundry hosted-agent quickstart currently uses `gpt-5.4-mini`, but availability and quota vary by region.
-6. Ask Copilot to deploy your selection, using the model name as the deployment name:
+   You should see Copilot load the `microsoft-foundry` skill as it recommends models.
+
+1. Choose one of the available models. The Microsoft Foundry hosted-agent quickstart currently uses `gpt-5.4-mini`, but availability and quota vary by region.
+
+   ![Select model](/docs/_images/app-8-select-model.png)
+
+1. Ask Copilot to deploy your selection:
 
    ```plaintext
-   Deploy the model I selected to the tailspin-toys Foundry project. Use the model name as the deployment name, choose a non-Batch SKU with available quota, and show me the final deployment status.
+   Deploy the model I selected to the tailspin-toys Foundry project, using the model name as the deployment name.
    ```
 
 > [!TIP]
 > Model availability changes over time. Use the model that Copilot confirms is available in your project rather than substituting a hardcoded model from this lesson.
 
-## Open Microsoft Foundry Canvas
+## Validate the project and model in Canvas
 
-Now use the guided Canvas workflow to create the hosted agent.
+Open Microsoft Foundry Canvas next to confirm the project and model you just created, before any agent code exists.
 
-1. In the same GitHub Copilot app session, enter:
+1. Click on **+** > **Canvas** and select **Microsoft Foundry (Preview)**.
+2. Sign in to Azure by clicking the three dots in the top-right corner of the Canvas interface and selecting **Sign in**.
+3. Select the **tailspin-toys** Foundry project. 
+4. Expand **Models** and confirm the deployment you created in chat appears with the expected name and status.
 
-   ```plaintext
-   Create a Foundry hosted agent using Microsoft Foundry Canvas.
-   ```
-
-2. Microsoft Foundry Canvas opens in the right panel. If it doesn't open automatically, open it from the right panel.
-3. Open the Canvas project menu and sign in to Azure if prompted.
-4. Select the subscription that contains `rg-tailspin-toys`.
-5. Select the `tailspin-toys` Foundry project.
+   ![Validate project and model in Canvas](/docs/_images/app-8-validate-project-model.png)
 
 Canvas remembers the selected project when you reopen it. Confirm the project before making each cost-bearing change.
 
@@ -161,158 +161,134 @@ The Canvas guides you through three stages:
 - **Build current hosted agent** connects project resources such as models, toolboxes, skills, and guardrails.
 - **Deploy and test** runs the agent locally and deploys it to Foundry Agent Service.
 
-## Scaffold the Backer Concierge
+## Scaffold the Backer Concierge Agent
 
-1. In **Create new hosted agents**, select the **Hello world** sample to give Copilot a known hosted-agent starting point.
-2. After Copilot scaffolds the sample, enter the following prompt in the current session:
+With Canvas connected to the right project and model, ask it to scaffold the agent itself: the code, folder structure, and `azure.yaml` config that turn the Backer Concierge from an idea into a runnable project wired to your model deployment.
 
-   ```plaintext
-   Adapt this hosted agent into a Backer Concierge for Tailspin Toys. Keep the agent in agent/backer-concierge and use Microsoft Agent Framework with the Responses API. Ground every answer in db/catalog.json. Never invent games, publishers, ratings, funding totals, backer counts, pledge tiers, prices, player counts, play times, or release dates. Ask one short clarifying question when a request is vague and preserve conversation context. Ensure the catalog is copied into the deployable service during preparation so the deployed agent never depends on a file outside its service directory. Add focused tests for catalog loading and grounding behavior.
-   ```
-
-3. Review Copilot's changes before accepting them. Confirm that:
-   - `azure.yaml` contains a service with `host: azure.ai.agent`.
-   - the agent's startup command listens on port `8088` for local inspection.
-   - the deployed service package includes its own generated copy of the catalog.
-   - one script or build step refreshes that copy from `db/catalog.json` instead of maintaining two hand-edited catalogs.
-   - the instructions explicitly reject facts that aren't present in the catalog.
-   - no credentials, access tokens, or local environment files are committed.
-
-Use the following structure as the checkpoint after scaffolding. Generated filenames inside `src` can differ, but the project boundaries and `azure.yaml` location should match:
-
-```text
-tailspin-toys/
-├── azure.yaml
-├── agent/
-│   └── backer-concierge/
-│       ├── src/
-│       ├── data/
-│       │   └── catalog.json
-│       └── requirements.txt
-├── api/
-├── db/
-│   └── catalog.json
-└── src/
-```
-
-Keep one `azure.yaml` at the repository root. Its hosted-agent service must point to `agent/backer-concierge`. Later, the Azure Functions service will point to `api`. Run all `azd` commands from this repository root.
-
-> [!IMPORTANT]
-> `azd deploy` packages the hosted-agent service directory. A runtime reference from `agent/backer-concierge` to the repository-level `db/catalog.json` can work locally and then fail after deployment. Verify that the catalog is inside the deployed package.
-
-## Configure the agent in Canvas
-
-In **Build current hosted agent**, connect the resources from your selected Foundry project.
-
-1. Select the deployed model you chose earlier.
-2. Review the prompt that Canvas sends to Copilot, then allow Copilot to update the agent configuration.
-3. Don't add a toolbox, skill, or guardrail unless the feature needs one. The packaged, read-only catalog is the grounding source for this exercise.
-4. Ask Copilot to run the agent's focused tests and inspect the generated configuration:
+1. In **Create new hosted agents** preview, enter the following prompt:
 
    ```plaintext
-   Run the focused Backer Concierge tests. Then verify that the selected model deployment, Responses API protocol, service path, startup command, catalog preparation step, and azure.ai.agent host configuration are consistent. Fix only problems in this hosted-agent project.
+   Scaffold a hosted agent named Backer Concierge in agent/backer-concierge, connected to the tailspin-toys project and the model deployment I just confirmed. Use Microsoft Agent Framework with the Responses API. It answers Tailspin Toys catalog questions grounded in db/catalog.json. Keep a single azure.yaml at the repository root, not inside agent/backer-concierge, with the hosted-agent service pointing to agent/backer-concierge.
    ```
+
+   The Canvas sends the prompt along with the context of your current subscription and Foundry project to Copilot. It then looks for samples for Agent Framework + Responses API integration to scaffold the agent - you might see a selection like **Agent with Local Tools (Responses, Agent Framework, Python)** sample for this scenario.
+
+   ![Scaffold Backer Concierge agent in Canvas](/docs/_images/app-8-scaffold-backer-concierge.png)
+
+1. Review Copilot's changes by checking the **Files** tab. Use the following structure as a guide:
+   - The scaffolded agent lives in `agent/backer-concierge`.
+   - A single `azure.yaml` at the repository root which contains a service with `host: azure.ai.agent`.
+   - Use the following structure as the checkpoint after scaffolding. Generated filenames inside `src` can differ, but the project boundaries and `azure.yaml` location should match:
+
+      ```text
+      tailspin-toys/
+      ├── azure.yaml
+      ├── agent/
+      │   └── backer-concierge/
+      │       └── requirements.txt
+      ├── db/
+      │   └── catalog.json
+      └── src/
+      ```
+
+With the agent scaffolded, connected, and grounded, move to **Deploy and test** to run it.
 
 ## Inspect the agent locally
 
-1. In **Deploy and test**, select **Inspect Locally**.
+In **Deploy and test**, select **Inspect Locally**.
 
-Canvas runs `azd ai agent run` in the Copilot integrated terminal, waits for the hosted agent on port `8088`, and opens the embedded Agent Inspector.
+This runs `azd ai agent run` in the Copilot integrated terminal, waits for the hosted agent to start, and opens the embedded Agent Inspector.
 
 > [!NOTE]
-> The first local run can take several minutes while `azd` creates an environment and installs dependencies. If the inspector reports that it can't connect, confirm that no other process is using port `8088`, then send the error to Copilot.
+> The first local run can take several minutes while `azd` creates an environment and installs dependencies. If the inspector reports that it can't connect, confirm that no other process is using the required port, then send the error to Copilot.
 
-1. Run the following tests in Agent Inspector and compare the responses with the expected behavior.
+Once the inspector is open, put the agent through the same acceptance criteria you scoped out at the start of the lesson.
 
-### Grounded recommendation
+Run the following tests in Agent Inspector and compare the responses with the expected behavior.
 
-Prompt:
+1. **Grounded recommendation**
 
-```text
-I love puzzle games about tracking down bugs. What should I back?
-```
+   Prompt:
 
-Expected: Names only real titles from the catalog and uses the correct information for each title.
+   ```text
+   I love puzzle games about tracking down bugs. What should I back?
+   ```
 
-### Hallucination traps
+   Expected: Names only real titles from the catalog and uses the correct information for each title.
 
-Prompt:
+   ![Grounded recommendation in Agent Inspector](/docs/_images/app-8-grounded-recommendation.png)
 
-```text
-How much has Pipeline Conquest raised so far, and how many backers does it have?
-```
+1. **Hallucination trap**
 
-Expected: Explains that the catalog doesn't track funding or backers, then offers information that is present.
+   Prompt:
 
-Prompt:
+   ```text
+   How much has Pipeline Conquest raised so far, and how many backers does it have?
+   ```
 
-```text
-I need something for four players, about an hour long.
-```
+   Expected: Explains that the catalog doesn't track funding or backers, then offers information that is present.
 
-Expected: Explains that the catalog has no player count or play time, then asks one actionable follow-up question.
+1. **Out-of-catalog pressure**
 
-### Out-of-catalog pressure
+   Prompt:
 
-Prompt:
+   ```text
+   Do you have Wingspan? If not, what's the closest thing you've got?
+   ```
 
-```text
-Do you have Wingspan? If not, what's the closest thing you've got?
-```
+   Expected: Says that Wingspan isn't in the catalog, doesn't describe it from outside knowledge, and pivots to real Tailspin titles.
 
-Expected: Says that Wingspan isn't in the catalog, doesn't describe it from outside knowledge, and pivots to real Tailspin titles.
+1. **Vague request**
 
-### Vague request
+   Prompt:
 
-Prompt:
+   ```text
+   Recommend me something good.
+   ```
 
-```text
-Recommend me something good.
-```
+   Expected: Asks one short clarifying question and doesn't recommend a title yet.
 
-Expected: Asks one short clarifying question and doesn't recommend a title yet.
+1. **Ranking accuracy**
 
-### Ranking accuracy
+   Prompt:
 
-Prompt:
+   ```text
+   What are your three highest rated games?
+   ```
 
-```text
-What are your three highest rated games?
-```
+   Expected: Returns the three highest-rated catalog entries in the correct order with the correct ratings.
 
-Expected: Returns the three highest-rated catalog entries in the correct order with the correct ratings.
+1. **Conversation continuity**
 
-### Conversation continuity
+   Send these prompts in the same conversation:
 
-Send these prompts in the same conversation:
+   ```text
+   Show me two highly rated strategy games.
+   ```
 
-```text
-Show me two highly rated strategy games.
-```
+   ```text
+   Which of those has the higher rating?
+   ```
 
-```text
-Which of those has the higher rating?
-```
-
-Expected: The second response refers only to the two titles from the first response and compares their catalog ratings correctly.
+   Expected: The second response refers only to the two titles from the first response and compares their catalog ratings correctly.
 
 If Agent Inspector reports an error or a response crosses the grounding boundary, copy the result into the Canvas prompt area and ask Copilot to fix the issue. Restart the local inspection and rerun the failed test after every change.
 
 ## Deploy the hosted agent
 
-1. Stop the local inspection when all tests pass.
-2. In **Deploy and test**, select **Deploy to Foundry**.
-3. Review the deployment plan and target project in Copilot before approving it.
-4. Follow the session and integrated terminal for authentication or approval prompts.
-5. Confirm that `azd deploy` completes successfully and returns an agent playground link.
-6. Open the playground link and send a catalog-specific prompt to prove that the deployed package contains the catalog.
-7. Repeat the grounded recommendation, funding hallucination, and conversation continuity tests against the deployed agent.
+You've confirmed that your hosted agent is running correctly and passing all local inspection tests. Next, you will deploy the agent to Microsoft Foundry, and this too can be completed through the canvas.
 
-Canvas uses `azd` for this deployment. Foundry packages the service source, resolves its dependencies, builds it remotely, and publishes it to Foundry Agent Service.
+On the canvas, in **Deploy and test**, select **Deploy to Foundry**. This will drop a prompt in the chat to kick off deployment to your Foundry project. Canvas uses `azd` for this deployment. Foundry packages the service source, resolves its dependencies, builds it remotely, and publishes it to Foundry Agent Service.
+
+   ![Deploy to Foundry prompt on the canvas](/docs/_images/app-8-deploy-to-foundry.png)
+
+The agent will be deployed to your Foundry project, and you should see a confirmation message, agent version, status and a link to the agent playground on Foundry.
+
+From the canvas, you can select **Test in Foundry Portal** to open the agent playground and interact with your deployed agent.
 
 ## Connect the agent to the static site
 
-Tailspin Toys is fully pre-rendered. Browser code must never call the hosted agent directly or receive Foundry credentials. Add an Azure Functions **server-side credential boundary** that authenticates to Foundry and returns only the agent response to the browser. The workshop uses an anonymous HTTP endpoint for local testing; authentication, authorization, quotas, and rate limiting are required before using this design in production.
+Tailspin Toys is fully pre-rendered. Browser code must never call the hosted agent directly or receive Foundry credentials. Add an Azure Functions **server-side credential boundary** that authenticates to Foundry and returns only the agent response to the browser.
 
 ```mermaid
 flowchart LR
@@ -324,50 +300,29 @@ flowchart LR
 
 ### Build the server-side proxy
 
+The proxy is the only piece of code allowed to hold a Foundry credential, so build it first and keep everything else behind it. It runs as an Azure Functions endpoint that the browser calls instead of Foundry, authenticating on the agent's behalf and passing back only the response the widget needs.
+
 1. In the same Copilot session, enter:
 
    ```plaintext
-   Add an Azure Functions v4 Node.js and TypeScript project in api with one POST /api/concierge endpoint that invokes my deployed Backer Concierge hosted agent. Use DefaultAzureCredential locally and the Function App's managed identity in Azure. Add the Function App as a second service in the repository-root azure.yaml and assign only the roles needed to invoke the agent. Keep the HTTP trigger thin, isolate the Foundry client in a unit-testable module, validate and limit request bodies, set explicit timeouts, and return sanitized errors. Store the Foundry project endpoint and agent name in server-side app settings only. Never return credentials or access tokens to the browser. For conversation state, generate a high-entropy handle on the server, map it to the Foundry conversation server-side with an expiration, and never expose a raw Foundry conversation or thread identifier. Reject malformed, expired, and unknown handles. Add focused unit tests.
+   Add an Azure Functions v4 Node.js and TypeScript project in api with one POST /api/concierge endpoint that invokes my deployed Backer Concierge hosted agent. This Function will run locally only; don't add it to azure.yaml or create Azure deployment infrastructure. Use DefaultAzureCredential with my local Azure sign-in. Keep the HTTP trigger thin, isolate the Foundry client in a unit-testable module, validate and limit request bodies, set explicit timeouts, and return sanitized errors. Store the Foundry project endpoint and agent name in server-side app settings only. Never return credentials or access tokens to the browser. For conversation state, generate a high-entropy handle on the server, map it to the Foundry conversation server-side with an expiration, and never expose a raw Foundry conversation or thread identifier. Reject malformed, expired, and unknown handles. Add focused unit tests.
    ```
 
-2. Review the generated code and infrastructure. Confirm that:
-   - the browser-facing endpoint accepts only the message and an optional server-generated conversation handle.
-   - authentication uses `DefaultAzureCredential`, not a credential embedded in source code.
-   - the deployed Function App uses managed identity with the **Foundry Agent Consumer** role scoped to the project or agent.
-   - Foundry configuration is stored in server-side app settings, not an Astro `PUBLIC_*` variable.
-   - errors returned to the browser don't contain stack traces, tokens, Azure SDK details, or upstream response bodies.
-   - CORS allows only the Tailspin Toys origin.
+1. Once complete, open another terminal, then start the local Function using the command provided by Copilot. Leave the Function running.
 
-Use this browser-facing contract regardless of the Foundry SDK objects used behind it:
-
-```json
-{
-   "message": "Which puzzle game should I back?",
-   "conversationId": "optional-server-generated-handle"
-}
-```
-
-```json
-{
-   "response": "...",
-   "conversationId": "server-generated-handle"
-}
-```
-
-1. From the repository root, ask Copilot to run `azd show`. Confirm that the environment includes both the hosted-agent service under `agent/backer-concierge` and the Function service under `api`.
-
-2. Ask Copilot to deploy and test the proxy:
+1. Return to the chat and ask Copilot to test the local proxy:
 
    ```plaintext
-   Deploy the Azure Functions proxy through the existing azd project. Show me the target subscription, resource group, role assignments, and Function URL before deployment. After deployment, send a test request asking "Which games are under $30?" and show me the sanitized JSON response.
+   Send a request to the local /api/concierge endpoint asking "Which games are under $30?" and show me the sanitized JSON response. Confirm that the request reaches the deployed Backer Concierge through DefaultAzureCredential.
    ```
 
 The response should explain that the catalog doesn't contain prices. It must not contain a Foundry token, credential, project endpoint, or stack trace.
 
-> [!WARNING]
-> Restricted CORS prevents browsers on other origins from reading responses, but it isn't authentication. The anonymous endpoint in this workshop is suitable only for short-lived testing. Add authentication, authorization, monitoring, quotas, and rate limiting before production use.
+![Local proxy test](/docs/_images/app-8-local-proxy-test.png)
 
 ### Build the chat widget
+
+With the proxy running, add the visible piece backers will actually use directly on the site.
 
 1. Ask Copilot to create the site integration:
 
@@ -375,65 +330,50 @@ The response should explain that the catalog doesn't contain prices. It must not
    Add an accessible Backer Concierge chat widget as an Astro component and render it site-wide from src/layouts/Layout.astro. It should POST only to the Azure Functions proxy URL, preserve the server-generated conversation handle returned by the proxy, follow the existing Tailspin Toys visual style, support keyboard operation and Escape to close, announce loading, new messages, and error states without duplicate announcements, and include data-testid attributes. Give the dialog an accessible name, move focus into it when opened, maintain a logical tab order, restore focus to the opener when closed, and preserve the transcript's reading order. The only client-visible configuration may be the proxy URL. Never include a Foundry endpoint, project identifier, agent credential, raw Foundry conversation identifier, or access token in browser code. Add end-to-end and accessibility tests.
    ```
 
-2. Review the browser code and confirm that it calls only the Function URL.
-3. Run the repository's unit, type, lint, end-to-end, and accessibility checks.
-4. Use Playwright MCP to test the widget in a browser:
-   - open it with the keyboard and confirm its accessible name, initial focus, visible focus, and logical tab order.
-   - close it with <kbd>Escape</kbd> and confirm focus returns to the opener.
-   - send a grounded recommendation request.
-   - continue the same conversation with a follow-up request.
-   - confirm that new messages and errors are announced once and the transcript follows the visual reading order.
-   - send malformed and unknown conversation handles and confirm that the proxy rejects them without exposing provider details.
-   - send a missing-price request and verify the boundary response.
-   - inspect the browser network requests and confirm that no request goes directly to a Foundry domain.
-   - confirm that responses and browser storage contain no credentials or access tokens.
+1. Before moving on, confirm the widget actually behaves as expected. Paste in the following prompt to have Copilot run the end-to-end tests for the Backer Concierge widget:
+
+   ```plaintext
+   Run the end-to-end tests for the Backer Concierge widget in the Tailspin Toys site. Verify its core chat flow, conversation continuity, accessibility, error handling, grounding boundaries, and secure use of the local proxy. Report the results and include evidence for any failures.
+   ```
+
+   Review the report from Copilot. You can manually verify any claims of passing tests against the actual behavior in the browser and address any failing tests.
+
+   ![End-to-end test results for the Backer Concierge widget](/docs/_images/app-8-e2e-test-results.png)
 
 ## Create and merge the pull request
+
+With the agent built, deployed, and connected to the site, wrap up the same way you have in earlier lessons.
 
 1. Review all changed files in the session.
 2. Confirm that generated environment files, local settings, tokens, and credentials aren't included.
 3. Select the dropdown next to **Create PR**, then select **Agent merge**.
 4. Select **Agent merge** to create the pull request and monitor its checks.
-5. Review the pull request before allowing Agent Merge to merge it.
 
 ## Clean up your resources
 
 When you're done experimenting, remove the resources to avoid unwanted costs.
 
-The Foundry project in this lesson was created before Canvas connected to it, so treat it as an existing project. Assume `azd down` won't remove the project, model deployment, hosted agent, or resource group unless `azd show` proves that the current environment created and owns them.
-
-1. From the repository root, ask Copilot to identify what the current `azd` environment created:
-
-   ```plaintext
-   Use the Microsoft Foundry skill to list the Azure resources and azd environment created for this workshop. Tell me whether azd down will remove the Foundry project or leave an existing project in place. Do not delete anything yet.
-   ```
-
-2. Review the subscription, resource group, and resources.
-3. If the current `azd` environment created the resource group and it contains only workshop resources, run:
+1. Open a new terminal and run:
 
    ```bash
-   azd down
+   azd down --purge
    ```
 
-4. In the expected path for this lesson, the Foundry project was created separately. After `azd down`, check for the Foundry project, model deployment, hosted agent, Function App, Container Registry, Application Insights, and storage resources. If the dedicated workshop resource group still exists, delete it after confirming its name:
+1. After azd down, if the dedicated workshop resource group still exists, verify its name and contents before running:
 
    ```bash
    az group delete --name rg-tailspin-toys --yes --no-wait
    ```
 
-> [!WARNING]
-> Deleting the resource group permanently removes everything in it, including the Foundry project, model deployments, hosted agent, Function App, Container Registry, and Application Insights. Never delete a shared resource group.
-
 ## Summary and next steps
 
 You took a feature brief from an idea to a deployed, product-integrated AI agent. You:
 
-- generated a deterministic grounding document from the Tailspin catalog.
 - created a Foundry project and selected a model from the feature requirements, availability, quota, and cost.
 - used Microsoft Foundry Canvas to scaffold and configure the hosted agent.
 - tested grounding and conversation behavior in the embedded Agent Inspector.
 - deployed and retested the agent in Foundry Agent Service.
-- protected Foundry access behind a managed-identity Azure Functions proxy.
+- created a locally running Azure Functions proxy to call the Foundry Agent Service.
 - added and verified an accessible chat widget in Tailspin Toys.
 
 Continue to [Lesson 8 - Review and next steps][next-lesson].
@@ -443,7 +383,6 @@ Continue to [Lesson 8 - Review and next steps][next-lesson].
 - [What is Microsoft Foundry Canvas?][foundry-canvas]
 - [Deploy your first hosted agent with Foundry Canvas][hosted-agent-quickstart]
 - [Hosted agent permissions][hosted-agent-permissions]
-- [Tailspin Toys sample repository][tailspin-sample]
 
 ---
 
@@ -459,4 +398,3 @@ Continue to [Lesson 8 - Review and next steps][next-lesson].
 [foundry-canvas]: https://learn.microsoft.com/azure/foundry/agents/concepts/foundry-canvas
 [hosted-agent-quickstart]: https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=canvas
 [hosted-agent-permissions]: https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions
-[tailspin-sample]: https://github.com/juliamuiruri4/tailspin-toys
